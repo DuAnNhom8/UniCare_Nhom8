@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tạo tài khoản UniCareer để khám phá cơ hội nghề nghiệp.">
+  <title>Đăng ký | UniCareer</title>
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/auth.css">
+  <script src="../../assets/js/site-ui.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../../index.html"><span class="brand-mark">U</span>UniCareer</a>
+      <nav class="nav-main" aria-label="Điều hướng chính">
+        <a href="../../index.html">Trang chủ</a>
+        <a href="../candidate/index.html">Việc làm</a>
+        <a href="../../index.html#employers">Dành cho doanh nghiệp</a>
+      </nav>
+      <div class="nav-side">
+        <span class="demo-label">UNICAREER · DEMO</span>
+        <a class="btn btn-outline" href="login.html">Đăng nhập</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <nav class="crumbs" aria-label="Đường dẫn">
+        <a href="../../index.html">Trang chủ</a>
+        <span aria-hidden="true">/</span>
+        <span class="current">Đăng ký</span>
+      </nav>
+
+      <section class="portal-panel auth-card auth-card--register">
+        <div class="portal-heading">
+          <div>
+            <div class="portal-kicker">BẮT ĐẦU VỚI UNICAREER</div>
+            <h1>Tạo tài khoản</h1>
+            <p>Chọn vai trò và điền thông tin để kết nối với cộng đồng nghề nghiệp.</p>
+          </div>
+        </div>
+
+        <form action="#" method="get">
+          <fieldset class="register-role-fieldset">
+            <legend class="register-role-legend">
+              Bạn tham gia UniCareer với vai trò nào?
+            </legend>
+            <p class="portal-help register-role-help">Vai trò này được gắn với tài khoản của bạn; sau khi đăng nhập, hệ thống sẽ đưa bạn đến đúng không gian.</p>
+            <div class="portal-grid-2">
+              <label class="portal-panel register-role-option">
+                <input type="radio" name="role" value="candidate" checked required>
+                <span><strong>Sinh viên / Ứng viên</strong><small class="register-role-description">Tìm việc, ứng tuyển và quản lý hồ sơ
+                    cá nhân.</small></span>
+              </label>
+              <label class="portal-panel register-role-option">
+                <input type="radio" name="role" value="employer" required>
+                <span><strong>Nhà tuyển dụng</strong><small class="register-role-description">Đăng tin và tìm kiếm ứng viên phù
+                    hợp.</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="portal-grid-2">
+            <div class="field">
+              <label for="name">Họ và tên</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="Nhập họ và tên" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+            </div>
+            <div class="field">
+              <label for="password">Mật khẩu</label>
+              <input id="password" name="password" type="password" autocomplete="new-password"
+                placeholder="Tạo mật khẩu" minlength="8" required>
+              <small>Sử dụng ít nhất 8 ký tự.</small>
+            </div>
+            <div class="field">
+              <label for="confirm-password">Xác nhận mật khẩu</label>
+              <input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password"
+                placeholder="Nhập lại mật khẩu" minlength="8" required>
+            </div>
+          </div>
+
+          <div class="portal-quick-actions register-actions">
+            <button class="btn btn-lg" type="button" disabled>Tạo tài khoản</button>
+            <span class="portal-help">Đăng ký sẽ khả dụng sau khi kết nối dịch vụ xác thực.</span>
+          </div>
+        </form>
+
+        <div class="portal-divider"></div>
+        <p class="register-login-prompt">Đã có tài khoản? <a class="portal-topbar__link" href="login.html">Đăng
+            nhập</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <div><strong>UniCareer</strong>
+        <p>Kết nối sinh viên với cơ hội nghề nghiệp.</p>
+      </div>
+      <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="../candidate/index.html">Khám phá việc
+          làm</a></div>
+    </div>
+  </footer>
+</body>
+
+</html>

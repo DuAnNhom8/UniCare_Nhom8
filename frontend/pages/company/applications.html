@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quản lý hồ sơ ứng tuyển | UniCareer</title>
+    <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/company.css">
+    <script src="../../assets/js/site-ui.js" defer></script>
+</head>
+
+<body>
+    <div class="portal-layout">
+        <aside class="portal-sidebar"><a class="portal-brand" href="../../index.html"><span
+                    class="brand-mark">U</span><span>UniCareer</span></a>
+            <div class="portal-subtitle">NHÀ TUYỂN DỤNG</div>
+            <nav class="portal-menu"><a href="dashboard.html"><span class="nav-emoji">◫</span><span>Tổng
+                        quan</span></a><a href="company-info.html"><span class="nav-emoji">▤</span><span>Thông tin công
+                        ty</span></a><a href="manage-jobs.html"><span class="nav-emoji">▣</span><span>Tin tuyển
+                        dụng</span></a><a href="post-job.html"><span class="nav-emoji">＋</span><span>Đăng tin
+                        mới</span></a><a href="applications.html" aria-current="page"><span
+                        class="nav-emoji">♙</span><span>Quản lý ứng viên</span></a><a href="ai-recommend.html"><span
+                        class="nav-emoji">✧</span><span>Phân tích CV</span></a>
+                <div class="portal-menu-spacer"></div><a href="../../index.html"><span
+                        class="nav-emoji">↗</span><span>Về trang chủ</span></a>
+            </nav>
+            <div class="portal-sidebottom"><span class="portal-avatar">TN</span>
+                <div><strong>TechNova</strong><small>Nhà tuyển dụng · Demo</small></div>
+            </div>
+        </aside>
+        <div class="portal-main">
+            <header class="portal-topbar">
+                <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
+                            class="brand-mark">U</span>UniCareer</a><span>Employer Workspace</span></div>
+                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
+                        class="portal-topbar__link" href="dashboard.html">Tổng quan ↗</a></div>
+            </header>
+            <main class="portal-content">
+                <div class="portal-heading">
+                    <div>
+                        <div class="portal-kicker">EMPLOYER / APPLICATIONS</div>
+                        <h1>Quản lý hồ sơ ứng tuyển</h1>
+                        <p>Xem, phân loại và cập nhật trạng thái ứng viên nộp hồ sơ.</p>
+                    </div><a class="btn btn-outline" href="ai-recommend.html">✧ Đối chiếu CV</a>
+                </div>
+                <div class="portal-stats">
+                    <div class="portal-stat">
+                        <div class="portal-stat__label">Tổng đơn</div>
+                        <div class="portal-stat__value">12</div>
+                        <div class="portal-stat__note">Trong tin tuyển dụng</div>
+                    </div>
+                    <div class="portal-stat">
+                        <div class="portal-stat__label">Đã tiếp nhận</div>
+                        <div class="portal-stat__value">05</div>
+                        <div class="portal-stat__note">Chưa xem xét</div>
+                    </div>
+                    <div class="portal-stat">
+                        <div class="portal-stat__label">Đang xem xét</div>
+                        <div class="portal-stat__value">04</div>
+                        <div class="portal-stat__note">Đang xử lý</div>
+                    </div>
+                    <div class="portal-stat">
+                        <div class="portal-stat__label">Đã chấp nhận</div>
+                        <div class="portal-stat__value">03</div>
+                        <div class="portal-stat__note">Đã cập nhật kết quả</div>
+                    </div>
+                </div>
+                <section class="portal-panel">
+                    <div class="portal-panel__heading">
+                        <div>
+                            <h2>Danh sách hồ sơ</h2>
+                            <p>Chọn ứng viên để xem thông tin và xử lý đơn.</p>
+                        </div><span class="portal-pill portal-pill--info">03 hồ sơ mẫu</span>
+                    </div>
+                    <div class="portal-toolbar">
+                        <div class="field"><label for="applicant-query">Tìm ứng viên</label><input id="applicant-query"
+                                type="search" placeholder="Tên, email, ngành học"></div>
+                        <div class="field"><label for="application-job">Tin tuyển dụng</label><select
+                                id="application-job">
+                                <option>Tất cả tin của tôi</option>
+                                <option>Backend Developer Intern</option>
+                                <option>Frontend Developer Intern</option>
+                            </select></div>
+                        <div class="field"><label for="application-status">Trạng thái</label><select
+                                id="application-status">
+                                <option>Tất cả trạng thái</option>
+                                <option>Đã tiếp nhận</option>
+                                <option>Đang xem xét</option>
+                                <option>Đã chấp nhận</option>
+                            </select></div>
+                    </div>
+                    <div class="portal-table-wrap">
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>Sinh viên</th>
+                                    <th>Ứng tuyển vị trí</th>
+                                    <th>Ngày nộp</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Nguyễn Minh Anh</strong><small>minhanh@example.com</small></td>
+                                    <td>Backend Developer Intern</td>
+                                    <td>08/11/2026</td>
+                                    <td><span class="status status--reviewing">Đang xem xét</span></td>
+                                    <td><button class="btn btn-outline btn-sm" disabled>Xem CV</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Trần Gia Hân</strong><small>giahan@example.com</small></td>
+                                    <td>Frontend Developer Intern</td>
+                                    <td>07/11/2026</td>
+                                    <td><span class="status status--received">Đã tiếp nhận</span></td>
+                                    <td><button class="btn btn-outline btn-sm" disabled>Xem CV</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Lê Bảo Ngọc</strong><small>baongoc@example.com</small></td>
+                                    <td>Backend Developer Intern</td>
+                                    <td>06/11/2026</td>
+                                    <td><span class="status status--accepted">Đã chấp nhận</span></td>
+                                    <td><button class="btn btn-outline btn-sm" disabled>Xem CV</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <p class="portal-help">Bảng đang hiển thị 3 hồ sơ mẫu; số liệu tổng quan chỉ mang tính minh họa. Tìm kiếm và lọc hoạt động trên các dòng đang hiển thị, còn cập nhật trạng thái và xem CV chưa kết nối.</p>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

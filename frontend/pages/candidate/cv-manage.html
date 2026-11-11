@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quản lý hồ sơ và CV UniCareer">
+  <title>Hồ sơ & CV | UniCareer</title>
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/candidate.css">
+  <script src="../../assets/js/site-ui.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../../index.html"><span class="brand-mark">U</span>UniCareer</a>
+      <nav class="nav-main" aria-label="Điều hướng ứng viên">
+        <a href="index.html">Việc làm</a>
+        <a href="my-applications.html">Đơn ứng tuyển</a>
+        <a class="is-active" href="cv-manage.html" aria-current="page">Hồ sơ & CV</a>
+      </nav>
+      <div class="nav-side"><span class="demo-label">DEMO · ỨNG VIÊN</span><a class="btn btn-outline"
+          href="../auth/login.html">Đăng nhập</a></div>
+    </div>
+  </header>
+  <main class="page">
+    <div class="container">
+      <nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Việc làm</a><span>/</span><span class="current">Hồ
+          sơ & CV</span></nav>
+      <div class="history-header">
+        <div class="screen-heading">
+          <h1>Hồ sơ & CV của tôi</h1>
+          <p>Quản lý thông tin ứng viên và chuẩn bị hồ sơ trước khi ứng tuyển.</p>
+        </div>
+        <a class="btn btn-outline" href="index.html">Khám phá việc làm</a>
+      </div>
+      <div class="cv-layout">
+        <section class="card">
+          <div class="mini-profile">
+            <div class="company-logo">NA</div>
+            <h3>Nguyễn Minh Anh</h3>
+            <p>Backend Developer Intern</p>
+            <p>Đại học Công nghệ · Công nghệ thông tin</p>
+            <p><strong>Kỹ năng:</strong> Python, FastAPI, MySQL</p>
+          </div>
+          <div class="cv-file-row"><span class="company-logo company-logo--orange">PDF</span>
+            <div><strong>NguyenMinhAnh_CV.pdf</strong>
+              <p class="muted">CV hiện tại · Đang sử dụng</p>
+            </div>
+          </div>
+        </section>
+        <section class="card">
+          <h2>Cập nhật hồ sơ</h2>
+          <p>Thông tin dưới đây là dữ liệu minh họa cho giao diện.</p>
+          <form action="#" method="get">
+            <div class="field"><label for="candidate-name">Họ và tên</label><input id="candidate-name" name="name"
+                value="Nguyễn Minh Anh"></div>
+            <div class="field"><label for="candidate-email">Email</label><input id="candidate-email" type="email"
+                name="email" value="minhanh@example.com"></div>
+            <div class="field"><label for="candidate-school">Trường học</label><input id="candidate-school"
+                name="school" value="Đại học Công nghệ"></div>
+            <div class="field"><label for="candidate-skills">Kỹ năng</label><input id="candidate-skills" name="skills"
+                value="Python, FastAPI, MySQL"></div>
+            <div class="field"><label for="cv-file">Tệp CV</label><input id="cv-file" type="file"
+                accept=".pdf,.doc,.docx"><small>Hỗ trợ định dạng PDF, DOC hoặc DOCX.</small></div>
+            <div class="field"><label for="cv-summary">Giới thiệu</label><textarea id="cv-summary" name="summary"
+                rows="5">Sinh viên Công nghệ thông tin, yêu thích phát triển ứng dụng web và API.</textarea></div>
+            <button class="btn" type="button" disabled>Lưu hồ sơ (bản demo)</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <div><strong>UniCareer</strong>
+        <p>Giao diện demo · Chưa kết nối dịch vụ lưu hồ sơ.</p>
+      </div>
+      <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="index.html">Tìm việc</a></div>
+    </div>
+  </footer>
+</body>
+
+</html>

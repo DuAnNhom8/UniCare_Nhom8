@@ -1,0 +1,171 @@
+/* Trang quản lý ứng viên và đối chiếu CV – mở rộng trên style.css. */
+.company-job-select {
+    min-width: 220px
+}
+
+.company-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 10px
+}
+
+.company-profile h3 {
+    font-size: 17px;
+    margin: 0 0 3px
+}
+
+.company-profile p {
+    margin: 0;
+    font-size: 12px
+}
+
+.company-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 9px 0 16px
+}
+
+.company-skill {
+    display: inline-block;
+    border: 1px solid #dbe7f5;
+    color: #37639d;
+    border-radius: 7px;
+    background: #f4f8ff;
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 650
+}
+
+.company-actionbar {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap
+}
+
+.company-actionbar .field {
+    flex: 1
+}
+
+.company-actionbar .btn {
+    margin-bottom: 0
+}
+
+.company-match {
+    display: grid;
+    grid-template-columns: 255px minmax(0, 1fr);
+    gap: 20px
+}
+
+.company-score {
+    display: grid;
+    place-items: center;
+    min-height: 230px;
+    border-radius: 14px;
+    background: linear-gradient(140deg, #e5f0ff, #eafbf4);
+    text-align: center;
+    padding: 20px
+}
+
+.company-score strong {
+    font-size: 52px;
+    font-weight: 850;
+    line-height: 1;
+    color: var(--blue);
+    letter-spacing: -.06em
+}
+
+.company-score small {
+    color: var(--muted);
+    font-size: 12px;
+    max-width: 185px
+}
+
+.company-score .meter {
+    height: 9px;
+    width: 180px;
+    overflow: hidden;
+    background: #d0dff5;
+    border-radius: 99px
+}
+
+.company-score .meter>i {
+    display: block;
+    height: 100%;
+    background: #2d75ee;
+    transition: width .3s
+}
+
+.company-match__skills h3 {
+    font-size: 14px;
+    margin: 0 0 10px
+}
+
+.company-match__skills p {
+    font-size: 13px
+}
+
+.company-warning {
+    font-size: 12px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    background: #fff8e9;
+    border: 1px solid #f3e7c4;
+    color: #836519;
+    line-height: 1.65
+}
+
+.company-results {
+    margin-top: 24px
+}
+
+.company-score--empty {
+    color: var(--muted)
+}
+
+.company-pulse {
+    padding: 15px;
+    border-radius: 11px;
+    background: #edf5ff;
+    color: #436b9d;
+    font-size: 12px
+}
+
+.company-select-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center
+}
+
+.company-status-form {
+    border: 1px solid var(--line);
+    padding: 16px;
+    border-radius: 12px;
+    background: #fbfdff
+}
+
+.company-status-form .field {
+    margin-bottom: 10px
+}
+
+@media(max-width:690px) {
+    .company-match {
+        grid-template-columns: 1fr
+    }
+
+    .company-actionbar .field {
+        flex: 1 1 100%
+    }
+}
+
+.company-ai-form-panel {
+    margin-top: 20px
+}
+
+.match-meter-fill-82 {
+    width: 82%
+}

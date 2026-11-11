@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quản lý người dùng | UniCareer</title>
+    <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/admin.css">
+    <script src="../../assets/js/site-ui.js" defer></script>
+</head>
+
+<body>
+    <div class="portal-layout">
+        <aside class="portal-sidebar"><a class="portal-brand" href="../../index.html"><span
+                    class="brand-mark">U</span><span>UniCareer</span></a>
+            <div class="portal-subtitle">QUẢN TRỊ HỆ THỐNG</div>
+            <nav class="portal-menu"><a href="dashboard.html"><span class="nav-emoji">◫</span><span>Tổng
+                        quan</span></a><a href="users.html" aria-current="page"><span
+                        class="nav-emoji">♙</span><span>Quản lý người dùng</span></a><a href="approve-jobs.html"><span
+                        class="nav-emoji">▣</span><span>Kiểm duyệt tin</span></a>
+                <div class="portal-menu-spacer"></div><a href="../../index.html"><span
+                        class="nav-emoji">↗</span><span>Về trang chủ</span></a>
+            </nav>
+            <div class="portal-sidebottom"><span class="portal-avatar">UC</span>
+                <div><strong>Quản trị viên</strong><small>Giao diện demo</small></div>
+            </div>
+        </aside>
+        <div class="portal-main">
+            <header class="portal-topbar">
+                <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
+                            class="brand-mark">U</span>UniCareer</a><span>Admin Workspace</span></div>
+                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
+                        class="portal-topbar__link" href="../../index.html">Trang chủ ↗</a></div>
+            </header>
+            <main class="portal-content">
+                <div class="portal-heading">
+                    <div>
+                        <div class="portal-kicker">ADMIN / USERS</div>
+                        <h1>Quản lý người dùng</h1>
+                        <p>Kiểm soát trạng thái hoạt động tài khoản trên UniCareer.</p>
+                    </div>
+                </div>
+                <section class="portal-panel">
+                    <div class="portal-panel__heading">
+                        <div>
+                            <h2>Danh sách người dùng</h2>
+                            <p>Tìm kiếm và xem vai trò tài khoản.</p>
+                        </div><span class="portal-pill portal-pill--info">04 tài khoản mẫu</span>
+                    </div>
+                    <div class="portal-toolbar">
+                        <div class="field"><label for="user-search">Tìm người dùng</label><input id="user-search"
+                                type="search" placeholder="Tên hoặc email"></div>
+                        <div class="field"><label for="user-role">Vai trò</label><select id="user-role">
+                                <option>Tất cả vai trò</option>
+                                <option>Sinh viên</option>
+                                <option>Nhà tuyển dụng</option>
+                            </select></div>
+                        <div class="field"><label for="user-status">Trạng thái</label><select id="user-status">
+                                <option>Tất cả trạng thái</option>
+                                <option>Đang hoạt động</option>
+                                <option>Chờ xác minh</option>
+                                <option>Đã khóa</option>
+                            </select></div>
+                    </div>
+                    <div class="portal-table-wrap">
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>Tài khoản</th>
+                                    <th>Vai trò</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Nguyễn Minh Anh</strong><small>minhanh@example.com</small></td>
+                                    <td>Sinh viên</td>
+                                    <td>02/11/2026</td>
+                                    <td><span class="status status--success">Đang hoạt động</span></td>
+                                    <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TechNova</strong><small>hr@technova.example</small></td>
+                                    <td>Nhà tuyển dụng</td>
+                                    <td>28/10/2026</td>
+                                    <td><span class="status status--success">Đang hoạt động</span></td>
+                                    <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Trần Gia Hân</strong><small>giahan@example.com</small></td>
+                                    <td>Sinh viên</td>
+                                    <td>25/10/2026</td>
+                                    <td><span class="status status--warning">Chờ xác minh</span></td>
+                                    <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BrightWorks</strong><small>jobs@brightworks.example</small></td>
+                                    <td>Nhà tuyển dụng</td>
+                                    <td>21/10/2026</td>
+                                    <td><span class="status status--rejected">Đã khóa</span></td>
+                                    <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <p class="portal-help">Bản giao diện tĩnh: tìm kiếm, bộ lọc và trạng thái tài khoản chưa kết nối chức
+                    năng.</p>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

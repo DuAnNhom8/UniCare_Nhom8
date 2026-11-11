@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Trang tìm việc UniCareer: tìm cơ hội thực tập và việc làm phù hợp cho sinh viên.">
+  <title>Tìm việc & thực tập | UniCareer</title>
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/candidate.css">
+  <script src="../../assets/js/site-ui.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../../index.html"><span class="brand-mark">U</span>UniCareer</a>
+      <button class="nav-menu-btn" type="button" aria-expanded="false" aria-controls="candidate-navigation"
+        aria-label="Mở menu">☰</button>
+      <nav class="nav-main" id="candidate-navigation" aria-label="Điều hướng ứng viên">
+        <a href="../../index.html">Trang chủ</a>
+        <a class="is-active" href="index.html" aria-current="page">Tìm việc</a>
+        <a href="my-applications.html">Đơn ứng tuyển</a>
+        <a href="cv-manage.html">Hồ sơ & CV</a>
+      </nav>
+      <div class="nav-side"><span class="demo-label">KHÔNG GIAN ỨNG VIÊN · DEMO</span><a class="btn btn-outline"
+          href="../auth/login.html">Đăng nhập</a></div>
+    </div>
+  </header>
+  <main class="page">
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">KHÔNG GIAN ỨNG VIÊN · TÌM VIỆC</div>
+        <h1>Tìm đúng cơ hội.<br><span>Bắt đầu sự nghiệp.</span></h1>
+        <p>Khám phá việc làm và thực tập từ các doanh nghiệp. Lọc theo ngành nghề, địa điểm và kỹ năng để chọn công việc
+          phù hợp.</p>
+        <form class="hero-search" action="#job-list">
+          <label class="search-input-wrap"><span aria-hidden="true">⌕</span><input name="q" type="search"
+              placeholder="Chức danh, kỹ năng, từ khóa..." aria-label="Từ khóa"></label>
+          <label class="search-location"><span aria-hidden="true">⌖</span><select name="location" aria-label="Địa điểm">
+              <option>Tất cả địa điểm</option>
+              <option>TP. Hồ Chí Minh</option>
+              <option>Hà Nội</option>
+              <option>Đà Nẵng</option>
+            </select></label>
+          <button class="btn btn-lg" type="submit">Tìm việc ngay</button>
+        </form>
+        <div class="hero-stats"><span><strong>01</strong> Hồ sơ cá nhân</span><span><strong>03</strong> Bước để ứng
+            tuyển</span><span><strong>100%</strong> Dành cho sinh viên</span></div>
+      </div>
+    </section>
+    <section class="jobs-area" id="job-list">
+      <div class="container">
+        <div class="section-title jobs-title">
+          <div>
+            <h2>Việc làm & thực tập mới nhất</h2>
+            <p>Khám phá các cơ hội nghề nghiệp dành cho sinh viên</p>
+          </div>
+          <button class="btn btn-outline mobile-filter-trigger" type="button" aria-controls="job-filters"
+            aria-expanded="false">☷ Bộ lọc</button>
+        </div>
+        <div class="jobs-layout">
+          <aside class="filters card" id="job-filters">
+            <div class="filter-heading">
+              <h3>Bộ lọc công việc</h3><a href="index.html">Xóa tất cả</a>
+            </div>
+            <div class="field"><label for="job-type">Loại hình công việc</label><select id="job-type">
+                <option>Tất cả loại hình</option>
+                <option>Thực tập</option>
+                <option>Bán thời gian</option>
+              </select></div>
+            <div class="field"><label for="job-place">Địa điểm</label><select id="job-place">
+                <option>Tất cả địa điểm</option>
+                <option>TP. Hồ Chí Minh</option>
+                <option>Hà Nội</option>
+                <option>Hybrid</option>
+              </select></div>
+            <div class="field"><label for="job-salary">Mức lương</label><select id="job-salary">
+                <option>Tất cả mức lương</option>
+                <option>Dưới 5 triệu</option>
+                <option>Thỏa thuận</option>
+              </select></div>
+            <p class="filter-note">Bộ lọc áp dụng trên các tin mẫu đang hiển thị.</p>
+          </aside>
+          <div class="list-section">
+            <div class="list-toolbar">
+              <div>
+                <h3 data-job-count aria-live="polite">4 cơ hội đang tuyển</h3>
+                <p>Tin đăng minh họa</p>
+              </div><select id="job-sort" aria-label="Sắp xếp kết quả">
+                <option value="default">Mặc định</option>
+                <option value="deadline">Hạn ứng tuyển gần nhất</option>
+              </select>
+            </div>
+            <div class="job-list">
+              <article class="job-card card">
+                <div class="company-logo">T</div>
+                <div>
+                  <p class="company-name">TechNova</p>
+                  <h3><a href="job-detail.html">Backend Developer Intern</a></h3>
+                  <div class="job-meta"><span>⌖ TP. Hồ Chí Minh</span><span>◷ Thực tập</span><span>3–5
+                      triệu/tháng</span></div>
+                  <div class="job-tags"><span class="tag tag--blue">Python</span><span class="tag">FastAPI</span><span
+                      class="tag">MySQL</span></div>
+                </div>
+                <div class="job-actions"><a class="btn btn-outline" href="job-detail.html">Xem chi tiết</a><span
+                    class="deadline">Hạn: 30/11/2026</span></div>
+              </article>
+              <article class="job-card card">
+                <div class="company-logo company-logo--purple">B</div>
+                <div>
+                  <p class="company-name">BluePeak Digital</p>
+                  <h3><a href="job-detail-frontend.html">Frontend Developer Intern</a></h3>
+                  <div class="job-meta"><span>⌖ Hybrid</span><span>◷ Thực tập</span><span>Lương thỏa thuận</span></div>
+                  <div class="job-tags"><span class="tag tag--blue">HTML/CSS</span><span
+                      class="tag">JavaScript</span><span class="tag">UI</span></div>
+                </div>
+                <div class="job-actions"><a class="btn btn-outline" href="job-detail-frontend.html">Xem chi
+                    tiết</a><span class="deadline">Hạn: 15/12/2026</span></div>
+              </article>
+              <article class="job-card card">
+                <div class="company-logo company-logo--green">N</div>
+                <div>
+                  <p class="company-name">NextStep Labs</p>
+                  <h3><a href="job-detail-data.html">Data Analyst Intern</a></h3>
+                  <div class="job-meta"><span>⌖ Hà Nội</span><span>◷ Thực tập</span><span>3–5 triệu/tháng</span></div>
+                  <div class="job-tags"><span class="tag tag--green">SQL</span><span class="tag">Excel</span><span
+                      class="tag">Phân tích dữ liệu</span></div>
+                </div>
+                <div class="job-actions"><a class="btn btn-outline" href="job-detail-data.html">Xem chi tiết</a><span
+                    class="deadline">Hạn: 20/12/2026</span></div>
+              </article>
+              <article class="job-card card">
+                <div class="company-logo company-logo--orange">C</div>
+                <div>
+                  <p class="company-name">CloudBridge</p>
+                  <h3><a href="job-detail-business.html">Business Analyst Intern</a></h3>
+                  <div class="job-meta"><span>⌖ TP. Hồ Chí Minh</span><span>◷ Thực tập</span><span>3–5
+                      triệu/tháng</span></div>
+                  <div class="job-tags"><span class="tag">Business</span><span class="tag">Excel</span><span
+                      class="tag">Communication</span></div>
+                </div>
+                <div class="job-actions"><a class="btn btn-outline" href="job-detail-business.html">Xem chi
+                    tiết</a><span class="deadline">Hạn: 22/12/2026</span></div>
+              </article>
+            </div>
+            <p class="jobs-empty" hidden>Không tìm thấy cơ hội phù hợp. Hãy thử thay đổi từ khóa hoặc bộ lọc.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <div><strong>UniCareer</strong>
+        <p>Giao diện demo · Tìm kiếm và bộ lọc áp dụng trên các tin mẫu đang hiển thị.</p>
+      </div>
+      <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="../auth/login.html">Đăng nhập</a></div>
+    </div>
+  </footer>
+</body>
+</html>

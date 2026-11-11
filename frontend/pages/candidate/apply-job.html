@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ứng tuyển công việc | UniCareer</title>
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/candidate.css">
+  <script src="../../assets/js/site-ui.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap"><a class="brand" href="../../index.html"><span
+          class="brand-mark">U</span>UniCareer</a>
+      <nav class="nav-main"><a class="is-active" href="index.html" aria-current="page">Việc làm</a><a href="my-applications.html">Đơn ứng tuyển</a><a
+          href="cv-manage.html">Hồ sơ & CV</a></nav>
+      <div class="nav-side"><span class="demo-label">DEMO · ỨNG VIÊN</span><a class="btn btn-outline"
+          href="../auth/login.html">Đăng nhập</a></div>
+    </div>
+  </header>
+  <main class="page">
+    <div class="container">
+      <nav class="crumbs"><a href="index.html">Việc làm</a><span>/</span><a id="apply-job-breadcrumb" href="job-detail.html">Chi tiết công
+          việc</a><span>/</span><span class="current">Ứng tuyển</span></nav>
+      <div class="apply-layout">
+        <section class="form-card card">
+          <h1 id="apply-job-title">Ứng tuyển Backend Developer Intern</h1>
+          <p>Hoàn thiện thông tin để gửi hồ sơ đến <span id="apply-job-company">TechNova</span>.</p>
+          <div class="profile-summary">
+            <div class="summary-field"><span>Ứng viên</span><strong>Nguyễn Minh Anh</strong></div>
+            <div class="summary-field"><span>Email</span><strong>minhanh@example.com</strong></div>
+            <div class="summary-field"><span>Trường</span><strong>Đại học Công nghệ</strong></div>
+            <div class="summary-field"><span>CV hiện tại</span><strong>NguyenMinhAnh_CV.pdf</strong></div>
+          </div>
+          <form action="#" method="get">
+            <div class="field"><label for="apply-email">Email liên hệ</label><input id="apply-email" type="email"
+                value="minhanh@example.com" required></div>
+            <div class="field"><label for="cv-select">Chọn CV</label><select id="cv-select">
+                <option>NguyenMinhAnh_CV.pdf · CV hiện tại</option>
+              </select></div>
+            <div class="field"><label for="cv-upload">Tệp CV (tùy chọn)</label><input id="cv-upload" type="file"
+                accept=".pdf,.doc,.docx"></div>
+            <div class="field"><label for="cover-letter">Thư giới thiệu</label><textarea id="cover-letter" rows="5"
+                placeholder="Chia sẻ ngắn gọn lý do bạn phù hợp với vị trí này."></textarea></div><label
+              class="checkline"><input type="checkbox" required><span>Tôi xác nhận thông tin hồ sơ là chính
+                xác.</span></label><button class="btn" type="button" disabled>Gửi hồ sơ (bản demo)</button>
+          </form>
+        </section>
+        <aside class="detail-sidebar">
+          <section class="card">
+            <h3>Vị trí ứng tuyển</h3>
+            <div class="company-logo" id="apply-job-logo">T</div>
+            <p><strong id="apply-job-position">Backend Developer Intern</strong><br><span id="apply-job-company-location">TechNova · TP. Hồ Chí Minh</span></p>
+            <p class="muted" id="apply-job-meta">Thực tập · 3–5 triệu/tháng</p><a id="apply-job-view-link" class="btn btn-outline btn-full"
+              href="job-detail.html">Xem chi tiết công việc</a>
+          </section>
+          <section class="card">
+            <h3>Lưu ý</h3>
+            <p>Đảm bảo CV có thông tin liên hệ và kỹ năng phù hợp. Hồ sơ gửi trong giao diện này chưa được lưu vào hệ
+              thống.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <div><strong>UniCareer</strong>
+        <p>Giao diện ứng tuyển minh họa.</p>
+      </div>
+      <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="my-applications.html">Đơn ứng tuyển</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

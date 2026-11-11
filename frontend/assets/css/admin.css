@@ -1,0 +1,31 @@
+/* Trang quản trị – mở rộng trên style.css. */
+.admin-activity {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px
+}
+
+.admin-activity:last-child {
+    border-bottom: 0
+}
+
+.admin-activity strong {
+    color: var(--navy)
+}
+
+.admin-activity small {
+    margin-left: auto;
+    color: var(--muted);
+    white-space: nowrap
+}
+
+.admin-reasons {
+    background: var(--bg);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--muted)
+}

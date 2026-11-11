@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kiểm duyệt tin tuyển dụng | UniCareer</title>
+    <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/admin.css">
+    <script src="../../assets/js/site-ui.js" defer></script>
+</head>
+
+<body>
+    <div class="portal-layout">
+        <aside class="portal-sidebar"><a class="portal-brand" href="../../index.html"><span
+                    class="brand-mark">U</span><span>UniCareer</span></a>
+            <div class="portal-subtitle">QUẢN TRỊ HỆ THỐNG</div>
+            <nav class="portal-menu"><a href="dashboard.html"><span class="nav-emoji">◫</span><span>Tổng
+                        quan</span></a><a href="users.html"><span class="nav-emoji">♙</span><span>Quản lý người
+                        dùng</span></a><a href="approve-jobs.html" aria-current="page"><span
+                        class="nav-emoji">▣</span><span>Kiểm duyệt tin</span></a>
+                <div class="portal-menu-spacer"></div><a href="../../index.html"><span
+                        class="nav-emoji">↗</span><span>Về trang chủ</span></a>
+            </nav>
+            <div class="portal-sidebottom"><span class="portal-avatar">UC</span>
+                <div><strong>Quản trị viên</strong><small>Giao diện demo</small></div>
+            </div>
+        </aside>
+        <div class="portal-main">
+            <header class="portal-topbar">
+                <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
+                            class="brand-mark">U</span>UniCareer</a><span>Admin Workspace</span></div>
+                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
+                        class="portal-topbar__link" href="../../index.html">Trang chủ ↗</a></div>
+            </header>
+            <main class="portal-content">
+                <div class="portal-heading">
+                    <div>
+                        <div class="portal-kicker">ADMIN / MODERATION</div>
+                        <h1>Kiểm duyệt tin tuyển dụng</h1>
+                        <p>Kiểm tra nội dung và thông tin doanh nghiệp trước khi công khai.</p>
+                    </div>
+                </div>
+                <div class="portal-banner"><span class="portal-banner__icon">⚑</span>
+                    <div><strong>Quy trình kiểm duyệt</strong>
+                        <p>Tin được duyệt mới có thể xuất hiện trong danh sách cơ hội dành cho sinh viên.</p>
+                    </div>
+                </div>
+                <section class="portal-panel">
+                    <div class="portal-panel__heading">
+                        <div>
+                            <h2>Danh sách tin tuyển dụng</h2>
+                            <p>Tin đang chờ được quản trị viên xem xét.</p>
+                        </div><span class="portal-pill portal-pill--info">03 tin mẫu</span>
+                    </div>
+                    <div class="portal-tabs"><button type="button" aria-selected="true">Chờ duyệt</button><button
+                            type="button" disabled>Đã duyệt</button><button type="button" disabled>Đã từ chối</button>
+                    </div>
+                    <div class="portal-toolbar">
+                        <div class="field"><label for="job-search">Tìm tin đăng</label><input id="job-search"
+                                type="search" placeholder="Vị trí hoặc doanh nghiệp"></div>
+                    </div>
+                    <div class="portal-table-wrap">
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>Tin tuyển dụng</th>
+                                    <th>Doanh nghiệp</th>
+                                    <th>Ngày gửi</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Product Design Intern</strong><small>Thực tập · Hà Nội</small></td>
+                                    <td>Northstar Studio</td>
+                                    <td>09/11/2026</td>
+                                    <td><span class="status status--warning">Chờ duyệt</span></td>
+                                    <td><button class="btn btn-sm" type="button" disabled>Duyệt</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Marketing Assistant</strong><small>Bán thời gian · TP. Hồ Chí
+                                            Minh</small></td>
+                                    <td>Greenway Media</td>
+                                    <td>08/11/2026</td>
+                                    <td><span class="status status--warning">Chờ duyệt</span></td>
+                                    <td><button class="btn btn-sm" type="button" disabled>Duyệt</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Junior QA Intern</strong><small>Thực tập · Hybrid</small></td>
+                                    <td>AppWorks</td>
+                                    <td>08/11/2026</td>
+                                    <td><span class="status status--warning">Chờ duyệt</span></td>
+                                    <td><button class="btn btn-sm" type="button" disabled>Duyệt</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <p class="portal-help">Các thao tác duyệt/từ chối chỉ là giao diện minh họa, chưa kết nối dữ liệu.</p>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
