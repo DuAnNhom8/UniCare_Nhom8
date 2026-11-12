@@ -3,8 +3,10 @@ Hệ thống Backend API - UniCareer (Nhóm 8)
 Phân hệ Doanh nghiệp & Tuyển dụng (TV2)
 """
 
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from backend.app.core.config import settings
 from backend.app.core.database import engine, Base
@@ -28,6 +30,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount thư mục frontend để chạy trực tiếp trên web server
+frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../frontend"))
+if os.path.exists(frontend_path):
+    app.mount("/frontend", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 # Đăng ký các router phân hệ
 app.include_router(company.router, prefix=settings.API_V1_STR)
