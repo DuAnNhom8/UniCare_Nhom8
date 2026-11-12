@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/company.css">
     <script src="../../assets/js/site-ui.js" defer></script>
+    <script src="../../assets/js/company.js" defer></script>
 </head>
 
 <body>
@@ -26,25 +27,31 @@
                 <div class="portal-menu-spacer"></div><a href="../../index.html"><span
                         class="nav-emoji">↗</span><span>Về trang chủ</span></a>
             </nav>
-            <div class="portal-sidebottom"><span class="portal-avatar">TN</span>
-                <div><strong>TechNova</strong><small>Nhà tuyển dụng · Demo</small></div>
+            <div class="portal-sidebottom"><span class="portal-avatar" id="sidebar-avatar">TN</span>
+                <div><strong id="sidebar-name">TechNova</strong><small>Nhà tuyển dụng · Tuyển dụng</small></div>
             </div>
         </aside>
         <div class="portal-main">
             <header class="portal-topbar">
                 <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
                             class="brand-mark">U</span>UniCareer</a><span>Employer Workspace</span></div>
-                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
-                        class="portal-topbar__link" href="dashboard.html">Tổng quan ↗</a></div>
+                <div class="portal-topbar-right">
+                    <span class="portal-demo" id="status-badge" style="background:#e6f4ea; color:#137333; font-weight:600; padding:4px 10px; border-radius:4px;">HỆ THỐNG SẴN SÀNG</span>
+                    <a class="portal-topbar__link" href="dashboard.html">Tổng quan ↗</a>
+                </div>
             </header>
             <main class="portal-content">
                 <div class="portal-heading">
                     <div>
                         <div class="portal-kicker">EMPLOYER / COMPANY PROFILE</div>
                         <h1>Thông tin công ty</h1>
-                        <p>Cập nhật hồ sơ doanh nghiệp hiển thị cùng tin tuyển dụng.</p>
+                        <p>Cập nhật và quản lý hồ sơ doanh nghiệp hiển thị cùng tin tuyển dụng.</p>
                     </div>
                 </div>
+
+                <!-- Toast / Alert message -->
+                <div id="company-alert" style="display:none; padding:12px 16px; border-radius:8px; margin-bottom:20px; font-weight:500;"></div>
+
                 <div class="portal-grid-2">
                     <section class="portal-panel">
                         <div class="portal-panel__heading">
@@ -53,39 +60,70 @@
                                 <p>Thông tin giới thiệu và liên hệ.</p>
                             </div>
                         </div>
-                        <form>
-                            <div class="field"><label for="company-name">Tên doanh nghiệp</label><input
-                                    id="company-name" value="TechNova"></div>
-                            <div class="field"><label for="company-industry">Lĩnh vực</label><input
-                                    id="company-industry" value="Công nghệ thông tin / Phần mềm"></div>
-                            <div class="field"><label for="company-website">Website</label><input id="company-website"
-                                    type="url" value="https://technova.example"></div>
-                            <div class="field"><label for="company-description">Giới thiệu</label><textarea
-                                    id="company-description"
-                                    rows="6">TechNova phát triển các giải pháp phần mềm và sản phẩm số cho doanh nghiệp.</textarea>
-                            </div><button class="btn" type="button" disabled>Lưu thông tin (bản demo)</button>
+                        <form id="companyInfoForm">
+                            <input type="hidden" id="company-id" value="1">
+                            <div class="field">
+                                <label for="company-name">Tên doanh nghiệp <span style="color:#d93025">*</span></label>
+                                <input id="company-name" required placeholder="Nhập tên doanh nghiệp..." value="TechNova">
+                            </div>
+                            <div class="field">
+                                <label for="company-industry">Lĩnh vực hoạt động</label>
+                                <input id="company-industry" placeholder="VD: Công nghệ thông tin / Phần mềm" value="Công nghệ thông tin / Phần mềm">
+                            </div>
+                            <div class="field">
+                                <label for="company-website">Website</label>
+                                <input id="company-website" type="text" placeholder="https://example.com" value="https://technova.example">
+                            </div>
+                            <div class="field">
+                                <label for="company-location">Trụ sở chính / Địa chỉ</label>
+                                <input id="company-location" placeholder="VD: TP. Hồ Chí Minh" value="TP. Hồ Chí Minh">
+                            </div>
+                            <div class="field">
+                                <label for="company-description">Giới thiệu doanh nghiệp</label>
+                                <textarea id="company-description" rows="6" placeholder="Giới thiệu đôi nét về doanh nghiệp, văn hóa, môi trường làm việc...">TechNova phát triển các giải pháp phần mềm và sản phẩm số cho doanh nghiệp.</textarea>
+                            </div>
+                            <div style="display:flex; gap:12px; align-items:center; margin-top:20px;">
+                                <button class="btn btn-primary" type="submit" id="btn-save-company" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+                                    <span>💾</span> Lưu thông tin doanh nghiệp
+                                </button>
+                                <button class="btn btn-secondary" type="button" id="btn-reset-company" style="cursor:pointer;">
+                                    Đặt lại
+                                </button>
+                            </div>
                         </form>
                     </section>
                     <aside class="portal-panel">
-                        <div class="company-profile"><span class="portal-avatar">TN</span>
+                        <div class="company-profile">
+                            <span class="portal-avatar" id="preview-avatar">TN</span>
                             <div>
-                                <h3>TechNova</h3>
-                                <p>Doanh nghiệp công nghệ</p>
+                                <h3 id="preview-name" style="margin:0;">TechNova</h3>
+                                <p id="preview-industry" style="margin:4px 0 0; color:#5f6368;">Doanh nghiệp công nghệ</p>
                             </div>
                         </div>
                         <div class="portal-divider"></div>
-                        <p>Doanh nghiệp công nghệ tập trung phát triển sản phẩm web và giải pháp dữ liệu.</p>
+                        <div style="margin-bottom:12px;">
+                            <small style="color:#5f6368; text-transform:uppercase; font-size:11px; letter-spacing:0.5px;">Địa chỉ:</small>
+                            <p id="preview-location" style="margin:2px 0 8px; font-weight:500;">TP. Hồ Chí Minh</p>
+                        </div>
+                        <div style="margin-bottom:12px;">
+                            <small style="color:#5f6368; text-transform:uppercase; font-size:11px; letter-spacing:0.5px;">Website:</small>
+                            <p style="margin:2px 0 8px;"><a id="preview-website" href="https://technova.example" target="_blank" style="color:var(--primary, #0056b3); word-break:break-all;">https://technova.example</a></p>
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <small style="color:#5f6368; text-transform:uppercase; font-size:11px; letter-spacing:0.5px;">Giới thiệu:</small>
+                            <p id="preview-description" style="margin:4px 0 0; line-height:1.5;">TechNova phát triển các giải pháp phần mềm và sản phẩm số cho doanh nghiệp.</p>
+                        </div>
                         <div class="portal-stats">
                             <div class="portal-stat">
                                 <div class="portal-stat__label">Tin tuyển dụng</div>
-                                <div class="portal-stat__value">04</div>
+                                <div class="portal-stat__value" id="preview-job-count">03</div>
                             </div>
                             <div class="portal-stat">
                                 <div class="portal-stat__label">Hồ sơ nhận được</div>
-                                <div class="portal-stat__value">12</div>
+                                <div class="portal-stat__value" id="preview-app-count">12</div>
                             </div>
                         </div>
-                        <p class="portal-help">Thông tin hiển thị là nội dung mẫu.</p>
+                        <p class="portal-help" id="last-updated-text" style="margin-top:12px; font-size:12px; color:#5f6368;">Đồng bộ dữ liệu trực tiếp với CSDL UniCareer.</p>
                     </aside>
                 </div>
             </main>
