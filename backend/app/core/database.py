@@ -27,13 +27,25 @@ DATABASE_URL = os.getenv(
 )
 
 # Khởi tạo engine và session
-# Lưu ý: Khi chưa có MySQL đang chạy, engine tạo kết nối lazy nên không bị crash app
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
-    pool_recycle=3600,
-    echo=False
-)
+# Ưu tiên kết nối MySQL theo cấu hình, tự động dự phòng SQLite local nếu MySQL chưa cấu hình mật khẩu/offline
+try:
+    engine = create_engine(
+        DATABASE_URL,
+        pool_pre_ping=True,
+        pool_recycle=3600,
+        echo=False
+    )
+    with engine.connect() as conn:
+        pass
+except Exception:
+    sqlite_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../database/unicareer.db"))
+    os.makedirs(os.path.dirname(sqlite_path), exist_ok=True)
+    DATABASE_URL = f"sqlite:///{sqlite_path}"
+    engine = create_engine(
+        DATABASE_URL,
+        connect_args={"check_same_thread": False},
+        pool_pre_ping=True
+    )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
