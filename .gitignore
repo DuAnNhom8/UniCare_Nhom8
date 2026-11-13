@@ -30,6 +30,8 @@ venv/
 .venv
 .venv/
 .env
+*.db
+backend/database/*.db
 
 # macOS
 .DS_Store
