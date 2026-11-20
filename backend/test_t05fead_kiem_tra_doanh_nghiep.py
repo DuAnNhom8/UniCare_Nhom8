@@ -1,13 +1,3 @@
-"""
-KIỂM THỬ TOÀN DIỆN CHỨC NĂNG DOANH NGHIỆP VÀ QUẢN LÝ TIN TUYỂN DỤNG (TASK T05FEAD)
-Dự án: UniCareer - Nền tảng kết nối việc làm và định hướng nghề nghiệp cho sinh viên (Nhóm 8)
-Người thực hiện: Đỗ Hoàng Sơn (PTIT-HCM-066)
-Mã Task: T05FEAD
-Mô tả task: Kiểm tra tạo doanh nghiệp và quản lý tin tuyển dụng
-Sprint: Sprint 3 (16/11 - 20/11)
-Hạn hoàn thành: 20/11/2026
-"""
-
 import os
 import sys
 import unittest
