@@ -1,0 +1,53 @@
+erDiagram
+    USERS ||--o| CANDIDATES : "user_id = candidate_id"
+    USERS ||--o| COMPANIES : "employer_id UNIQUE"
+    COMPANIES ||--o{ JOB_POSTS : "company_id"
+    CANDIDATES ||--o{ APPLICATIONS : "candidate_id"
+    JOB_POSTS ||--o{ APPLICATIONS : "job_id"
+
+    USERS {
+        int user_id PK
+        varchar email UK
+        varchar password_hash
+        enum role
+        boolean is_active
+        timestamp created_at
+    }
+    CANDIDATES {
+        int candidate_id PK,FK
+        varchar full_name
+        varchar phone
+        varchar university
+        varchar major
+        text skills
+        text bio
+        varchar cv_url
+    }
+    COMPANIES {
+        int company_id PK
+        int employer_id FK,UK
+        varchar company_name
+        text description
+        varchar website
+    }
+    JOB_POSTS {
+        int job_id PK
+        int company_id FK
+        varchar title
+        text description
+        text requirements
+        varchar location
+        varchar salary_range
+        date deadline
+        enum status
+        timestamp created_at
+    }
+    APPLICATIONS {
+        int application_id PK
+        int job_id FK
+        int candidate_id FK
+        enum status
+        int ai_match_score
+        text ai_feedback
+        timestamp applied_at
+    }

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UniCareer | Việc làm sinh viên</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<header><h1>UniCareer</h1><nav><a href="/static/index.html">Việc làm</a><a href="/static/ai.html">Phân tích CV</a><a href="/static/employer.html">Nhà tuyển dụng</a><a href="/static/admin.html">Quản trị</a><button class="secondary" id="logout">Đăng xuất</button></nav></header>
+<main>
+<div class="grid">
+<section class="panel"><h2>Đăng nhập</h2><form id="login"><label>Email</label><input id="loginEmail" type="email" required><label>Mật khẩu</label><input id="loginPassword" type="password" required><div class="actions"><button type="submit">Đăng nhập</button></div></form><p id="loginMsg" class="status"></p></section>
+<section class="panel"><h2>Đăng ký</h2><form id="register"><label>Email</label><input id="regEmail" type="email" required><label>Mật khẩu</label><input id="regPassword" type="password" minlength="8" required><label>Vai trò</label><select id="regRole"><option value="CANDIDATE">Sinh viên</option><option value="EMPLOYER">Nhà tuyển dụng</option></select><label id="extraLabel">Họ tên sinh viên</label><input id="regExtra" required><div class="actions"><button type="submit">Tạo tài khoản</button></div></form><p id="regMsg" class="status"></p></section>
+</div>
+<section class="panel"><div class="topline"><h2>Việc làm đang tuyển</h2><span id="sessionLabel" class="muted small"></span></div><div class="grid"><div><label>Từ khóa</label><input id="keyword" placeholder="Python, thực tập, marketing..."></div><div><label>Địa điểm</label><input id="location" placeholder="TP.HCM..."></div></div><div class="actions"><button id="search">Tìm kiếm</button><a class="button" href="/static/ai.html">Phân tích CV với AI</a></div><div id="jobs"></div><p id="jobMsg" class="status"></p></section>
+<section class="panel"><h2>Đơn ứng tuyển của tôi</h2><div id="applications" class="muted">Đăng nhập bằng Candidate để xem trạng thái đơn.</div></section>
+</main><footer>UniCareer – SRS 1.1 – Demo FastAPI + MySQL</footer>
+<script src="/static/app.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+$('logout').onclick = logout;
+$('regRole').onchange = () => { const employer = $('regRole').value === 'EMPLOYER'; $('extraLabel').textContent = employer ? 'Tên công ty' : 'Họ tên sinh viên'; };
+$('register').onsubmit = async e => {
+ e.preventDefault();
+ const role = $('regRole').value;
+ const body = { email: $('regEmail').value, password: $('regPassword').value, role };
+ body[role === 'EMPLOYER' ? 'company_name' : 'full_name'] = $('regExtra').value;
+ try { await api('/auth/register', 'POST', body); show($('regMsg'), 'Đăng ký thành công. Hãy đăng nhập.'); }
+ catch (err) { show($('regMsg'), err.message, true); }
+};
+$('login').onsubmit = async e => {
+ e.preventDefault();
+ try {
+  const form = new URLSearchParams({username:$('loginEmail').value,password:$('loginPassword').value});
+  const res = await fetch('/auth/login',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:form});
+  const data = await res.json();
+  if (!res.ok) throw Error(data.detail || 'Đăng nhập thất bại');
+  setToken(data.access_token);
+  const me = await api('/auth/me');
+  if (me.role === 'ADMIN') window.location.href = '/static/admin.html';
+  else if (me.role === 'EMPLOYER') window.location.href = '/static/employer.html';
+  else window.location.href = '/static/index.html';
+ } catch(err) { show($('loginMsg'),err.message,true); }
+};
+async function loadJobs() {
+ const params = new URLSearchParams();
+ if ($('keyword').value.trim()) params.set('keyword', $('keyword').value.trim());
+ if ($('location').value.trim()) params.set('location', $('location').value.trim());
+ try {
+  const jobs = await api('/jobs?' + params.toString());
+  $('jobs').replaceChildren();
+  if (!jobs.length) $('jobs').append(element('p','Không tìm thấy việc làm đang tuyển.','muted'));
+  for (const job of jobs) {
+   const item = element('div','', 'job');
+   item.append(element('h3',job.title));
+   item.append(element('p',`Địa điểm: ${job.location || 'Chưa cập nhật'} | Hạn: ${job.deadline}`,'muted'));
+   item.append(element('p',job.description));
+   item.append(element('p','Yêu cầu: ' + job.requirements));
+   const btn = element('button','Ứng tuyển');
+   btn.onclick = async () => { try { await api('/applications','POST',{job_id:job.job_id});show($('jobMsg'),'Đã gửi đơn ứng tuyển');await loadApplications(); }catch(err){show($('jobMsg'),err.message,true);} };
+   item.append(btn);
+   $('jobs').append(item);
+  }
+ } catch(err) { show($('jobMsg'),err.message,true); }
+}
+async function loadApplications() {
+ if (!getToken()) return;
+ try {
+  const me = await api('/auth/me');
+  $('sessionLabel').textContent = `Đã đăng nhập: ${me.email} (${me.role})`;
+  if (me.role !== 'CANDIDATE') return;
+  const applications = await api('/applications/me');
+  $('applications').replaceChildren();
+  if (!applications.length) $('applications').append(element('p','Chưa ứng tuyển tin nào.'));
+  applications.forEach(app=>{
+   const item=element('div','','job');
+   item.append(element('h3',`${app.job_title} • ${app.status}`));
+   item.append(element('p',`Đã nộp: ${new Date(app.applied_at).toLocaleString('vi-VN')}`,'muted'));
+   if(app.ai_result){
+    item.append(element('p',`Điểm đối chiếu kỹ năng tham khảo: ${app.ai_result.score}/100`));
+    item.append(element('p',`Kỹ năng có bằng chứng: ${app.ai_result.matched_skills.join(', ')||'Chưa ghi nhận'}`));
+    item.append(element('p',`Kỹ năng cần bổ sung minh chứng: ${app.ai_result.missing_skills.join(', ')||'Không có'}`));
+    app.ai_result.suggestions.forEach(s=>item.append(element('p','• '+s,'small')));
+   }
+   const link=element('a','Phân tích CV cho tin này','button');link.href=`/static/ai.html?job_id=${encodeURIComponent(app.job_id)}`;item.append(link);
+   $('applications').append(item);
+  });
+ } catch(err) { $('sessionLabel').textContent = 'Phiên đăng nhập không hợp lệ'; }
+}
+$('search').onclick = loadJobs;
+loadJobs();loadApplications();
+</script>
+</body></html>

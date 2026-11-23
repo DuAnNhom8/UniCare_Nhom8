@@ -1,0 +1,51 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UniCareer | Phân tích CV</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><header><h1>UniCareer | Phân tích CV</h1><nav><a href="/static/index.html">Việc làm / đơn đã ứng tuyển</a><a href="/docs">API Docs</a><button class="secondary" onclick="logout()">Đăng xuất</button></nav></header>
+<main><div class="grid"><section class="panel"><h2>Phân tích CV theo tin tuyển dụng</h2><p class="muted">Chọn tin tuyển dụng, dán nội dung CV hoặc tải một file PDF ở phía dưới.</p><label>Chọn tin tuyển dụng</label><select id="job"></select><label>Nội dung CV (nếu không dùng file PDF đã lưu)</label><textarea id="cv" placeholder="Ví dụ: Tôi có kinh nghiệm Python, FastAPI, MySQL... Dự án đã làm..."></textarea><label><input id="save" type="checkbox" style="width:auto;margin-right:7px">Lưu kết quả vào đơn ứng tuyển hiện có</label><label><input id="consent" type="checkbox" style="width:auto;margin-right:7px">Tôi đồng ý gửi nội dung CV đến nhà cung cấp AI bên ngoài nếu hệ thống bật chế độ OpenAI</label><div class="actions"><button id="analyze">Phân tích</button><button type="button" id="saved" class="secondary">Xem kết quả đã lưu</button></div><p class="status" id="msg"></p></section>
+<section class="panel"><h2>CV PDF của tôi</h2><p class="muted small">File tối đa 5MB, không dùng PDF có mật khẩu. Chỉ Candidate và nhà tuyển dụng đã nhận đơn ứng tuyển được xem CV theo quyền.</p><input type="file" id="file" accept="application/pdf,.pdf"><div class="actions"><button id="upload" class="secondary">Tải CV lên</button></div><p class="status" id="uploadMsg"></p><hr><h2>Kết quả phân tích</h2><div id="results" class="muted">Chưa có kết quả.</div></section></div>
+<div class="warning"><strong>Lưu ý:</strong> Điểm chỉ dùng để tham khảo và cải thiện hồ sơ, không thay thế đánh giá của người tuyển dụng. Chế độ <code>rules</code> dùng đối chiếu từ khóa, không phải mô hình AI. Khi bật OpenAI, nội dung CV sẽ được gửi đến nhà cung cấp API từ backend.</div></main><footer>UniCareer – AI là chức năng mở rộng</footer>
+<script src="/static/app.js"></script><script>
+const $=id=>document.getElementById(id);
+async function loadJobs(){
+ try{ const jobs=await api('/jobs?limit=100'); $('job').replaceChildren();jobs.forEach(job=>{$('job').append(new Option(`${job.title} (#${job.job_id})`,job.job_id));});const requested=new URLSearchParams(location.search).get('job_id');if(requested&&jobs.some(j=>String(j.job_id)===requested))$('job').value=requested;if(!jobs.length)show($('msg'),'Chưa có tin tuyển dụng đang hoạt động.');}
+ catch(err){show($('msg'),err.message,true);}
+}
+$('upload').onclick=async()=>{
+ if(!$('file').files.length){show($('uploadMsg'),'Hãy chọn một file PDF',true);return;}
+ const form=new FormData();form.append('file',$('file').files[0]);
+ try{await api('/candidates/me/cv','POST',form);show($('uploadMsg'),'Đã cập nhật CV PDF');}
+ catch(err){show($('uploadMsg'),err.message,true);}
+};
+function renderResult(data){
+ $('results').replaceChildren();
+ $('results').append(element('div',data.score+'/100','score'));
+  $('results').append(element('p',`Phương pháp: ${data.method} | Đã lưu vào đơn: ${data.saved_to_application?'Có':'Không'}`,'muted'));
+  for(const [name,skills] of [['Kỹ năng phù hợp',data.matched_skills],['Kỹ năng chưa có bằng chứng trong CV',data.missing_skills]]){
+   $('results').append(element('h3',name));
+   if(!skills.length)$('results').append(element('p','Chưa ghi nhận.','muted'));
+   skills.forEach(skill=>$('results').append(element('span',skill,'pill')));
+  }
+  $('results').append(element('h3','Gợi ý cải thiện'));
+  const ul=document.createElement('ul');data.suggestions.forEach(s=>ul.append(element('li',s)));$('results').append(ul);
+  $('results').append(element('p',data.disclaimer,'muted small'));
+}
+$('analyze').onclick=async()=>{
+ const jobId=Number($('job').value);if(!jobId){show($('msg'),'Hãy chọn tin tuyển dụng',true);return;}
+ const button=$('analyze');button.disabled=true;
+ try{
+  const data=await api('/ai/analyze','POST',{job_id:jobId,cv_text:$('cv').value.trim()||null,save_to_application:$('save').checked,consent_to_external_processing:$('consent').checked});
+  renderResult(data);
+  show($('msg'),'Phân tích hoàn tất');
+ }catch(err){show($('msg'),err.message,true);}finally{button.disabled=false;}
+};
+$('saved').onclick=async()=>{
+ try{
+  const applications=await api('/applications/me');
+  const current=applications.find(a=>String(a.job_id)===$('job').value);
+  if(!current){show($('msg'),'Bạn chưa ứng tuyển tin này.',true);return;}
+  if(!current.ai_result){show($('msg'),'Đơn chưa có kết quả phân tích được lưu.',true);return;}
+  renderResult({...current.ai_result,saved_to_application:true,disclaimer:'Đánh giá chỉ mang tính tham khảo, không phải quyết định tuyển dụng.'});
+  show($('msg'),'Đang hiển thị kết quả phân tích đã lưu.');
+ }catch(err){show($('msg'),err.message,true);}
+};
+currentUser(['CANDIDATE']).then(loadJobs).catch(err=>show($('msg'),err.message,true));
+</script></body></html>
