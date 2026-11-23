@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Quản lý tài khoản người dùng"><title>Quản lý người dùng | UniCareer</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+<link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="../../assets/css/admin.css">
+<script defer type="module" src="../../assets/js/admin.js"></script></head>
+<body data-portal-page="users" data-role="admin">
+<div class="portal-backdrop" aria-hidden="true"></div><div class="portal-layout">
+<aside class="portal-sidebar" aria-label="Menu QUẢN TRỊ HỆ THỐNG"><a class="portal-brand" href="../candidate/index.html"><span class="brand-mark">U</span><span>UniCareer</span></a>
+<div class="portal-subtitle">QUẢN TRỊ HỆ THỐNG</div><nav class="portal-menu" aria-label="Điều hướng chính"><a href="dashboard.html" ><span class="nav-emoji" aria-hidden="true">◫</span><span>Tổng quan</span></a><a href="users.html" aria-current="page"><span class="nav-emoji" aria-hidden="true">♙</span><span>Quản lý người dùng</span></a><a href="approve-jobs.html" ><span class="nav-emoji" aria-hidden="true">▣</span><span>Kiểm duyệt tin</span></a>
+<div class="portal-menu-spacer"></div><a href="../candidate/index.html"><span class="nav-emoji" aria-hidden="true">↗</span><span>Về trang tìm việc</span></a></nav>
+<div class="portal-sidebottom"><span class="portal-avatar">UC</span><div><strong>Quản trị viên</strong><small>Giao diện demo Sprint 2</small></div></div></aside>
+<div class="portal-main"><header class="portal-topbar"><div class="portal-topbar-left"><button type="button" class="portal-menu-toggle" data-portal-menu aria-label="Mở menu" aria-expanded="false">☰</button>
+<div><strong>UniCareer Workspace</strong><small style="display:block">Nền tảng kết nối việc làm sinh viên</small></div></div>
+<div class="portal-topbar-right"><span class="portal-demo" title="Dữ liệu được lưu cục bộ trên trình duyệt">DỮ LIỆU DEMO</span><a class="portal-topbar__link" href="../candidate/index.html">Khám phá việc làm ↗</a><span class="portal-avatar">UC</span></div></header>
+<main class="portal-content"><div class="portal-heading"><div><div class="portal-kicker">ADMIN / USERS</div><h1>Quản lý người dùng</h1><p>Kiểm soát quyền truy cập và trạng thái hoạt động của từng tài khoản.</p></div></div>
+<section class="portal-panel"><div class="portal-panel__heading"><div><h2>Danh sách người dùng</h2><p>Tìm kiếm, xem vai trò và khóa/mở khóa tài khoản.</p></div><span id="users-count" class="portal-pill portal-pill--info">Đang tải...</span></div>
+<div class="portal-toolbar"><div class="field"><label for="user-query">Tìm theo email hoặc tên</label><input id="user-query" type="search" autocomplete="off" placeholder="Nhập email hoặc tên người dùng..."></div><div class="field"><label for="user-role">Vai trò</label><select id="user-role"><option value="">Tất cả vai trò</option><option value="CANDIDATE">Sinh viên</option><option value="EMPLOYER">Nhà tuyển dụng</option><option value="ADMIN">Quản trị viên</option></select></div><div class="field"><label for="user-state">Trạng thái</label><select id="user-state"><option value="">Tất cả trạng thái</option><option value="active">Đang hoạt động</option><option value="inactive">Đã khóa</option></select></div></div>
+<div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Tài khoản</th><th>Vai trò</th><th>Ngày tạo</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody id="users-body"><tr><td colspan="5" class="loading">Đang tải dữ liệu người dùng...</td></tr></tbody></table></div><div id="users-empty"></div></section>
+<p class="portal-help">Lưu ý: bản demo không thay thế kiểm tra quyền ở Backend. Admin chỉ có thể khóa/mở các tài khoản Candidate và Employer; API thật phải xác minh quyền quản trị.</p>
+</main></div></div>
+<dialog class="portal-modal" id="portal-confirm" aria-labelledby="confirm-title"><div class="portal-modal__content"><h2 id="confirm-title">Xác nhận</h2><p id="confirm-description">Bạn có chắc chắn?</p><div class="portal-modal__actions"><button type="button" class="btn btn-outline" id="confirm-no">Hủy</button><button type="button" class="btn" id="confirm-yes">Xác nhận</button></div></div></dialog>
+</body></html>

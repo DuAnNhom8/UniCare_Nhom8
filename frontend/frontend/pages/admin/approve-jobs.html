@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Duyệt tin tuyển dụng"><title>Kiểm duyệt tin tuyển dụng | UniCareer</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+<link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="../../assets/css/admin.css">
+<script defer type="module" src="../../assets/js/admin.js"></script></head>
+<body data-portal-page="approve-jobs" data-role="admin">
+<div class="portal-backdrop" aria-hidden="true"></div><div class="portal-layout">
+<aside class="portal-sidebar" aria-label="Menu QUẢN TRỊ HỆ THỐNG"><a class="portal-brand" href="../candidate/index.html"><span class="brand-mark">U</span><span>UniCareer</span></a>
+<div class="portal-subtitle">QUẢN TRỊ HỆ THỐNG</div><nav class="portal-menu" aria-label="Điều hướng chính"><a href="dashboard.html" ><span class="nav-emoji" aria-hidden="true">◫</span><span>Tổng quan</span></a><a href="users.html" ><span class="nav-emoji" aria-hidden="true">♙</span><span>Quản lý người dùng</span></a><a href="approve-jobs.html" aria-current="page"><span class="nav-emoji" aria-hidden="true">▣</span><span>Kiểm duyệt tin</span></a>
+<div class="portal-menu-spacer"></div><a href="../candidate/index.html"><span class="nav-emoji" aria-hidden="true">↗</span><span>Về trang tìm việc</span></a></nav>
+<div class="portal-sidebottom"><span class="portal-avatar">UC</span><div><strong>Quản trị viên</strong><small>Giao diện demo Sprint 2</small></div></div></aside>
+<div class="portal-main"><header class="portal-topbar"><div class="portal-topbar-left"><button type="button" class="portal-menu-toggle" data-portal-menu aria-label="Mở menu" aria-expanded="false">☰</button>
+<div><strong>UniCareer Workspace</strong><small style="display:block">Nền tảng kết nối việc làm sinh viên</small></div></div>
+<div class="portal-topbar-right"><span class="portal-demo" title="Dữ liệu được lưu cục bộ trên trình duyệt">DỮ LIỆU DEMO</span><a class="portal-topbar__link" href="../candidate/index.html">Khám phá việc làm ↗</a><span class="portal-avatar">UC</span></div></header>
+<main class="portal-content"><div class="portal-heading"><div><div class="portal-kicker">ADMIN / MODERATION</div><h1>Kiểm duyệt tin tuyển dụng</h1><p>Kiểm tra mô tả, yêu cầu và doanh nghiệp trước khi quyết định.</p></div></div>
+<div class="portal-banner"><span class="portal-banner__icon">⚑</span><div><strong>Quy trình kiểm duyệt</strong><p>Chỉ các tin <b>APPROVED + ACTIVE + còn hạn</b> được hiển thị công khai.</p></div></div>
+<section class="portal-panel"><div class="portal-panel__heading"><div><h2>Danh sách tin tuyển dụng</h2><p>Duyệt nội dung và xử lý tin không hợp lệ.</p></div><span id="moderation-count" class="portal-pill portal-pill--info">Đang tải...</span></div>
+<div class="portal-tabs" role="tablist" aria-label="Bộ lọc kiểm duyệt"><button type="button" role="tab" aria-selected="true" data-tab="PENDING">Chờ duyệt <span id="tab-count-pending"></span></button><button type="button" role="tab" aria-selected="false" data-tab="APPROVED">Đã duyệt</button><button type="button" role="tab" aria-selected="false" data-tab="REJECTED">Đã từ chối</button></div>
+<div class="portal-toolbar"><div class="field"><label for="moderation-query">Tìm tin đăng</label><input id="moderation-query" type="search" placeholder="Tên vị trí hoặc doanh nghiệp..."></div></div><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Tin tuyển dụng</th><th>Doanh nghiệp</th><th>Ngày đăng</th><th>Hiệu lực</th><th>Hành động</th></tr></thead><tbody id="moderation-body"><tr><td colspan="5" class="loading">Đang tải tin tuyển dụng...</td></tr></tbody></table></div><div id="moderation-empty"></div></section>
+<section class="portal-panel" id="moderation-detail" hidden><div class="portal-panel__heading"><div><h2 id="moderation-title">Chi tiết tin tuyển dụng</h2><p id="moderation-company">Thông tin doanh nghiệp</p></div><button type="button" class="btn btn-outline" id="moderation-close">Đóng chi tiết</button></div><div id="moderation-detail-body"></div><div class="portal-divider"></div><div class="portal-quick-actions" id="moderation-actions"></div></section>
+</main></div></div>
+<dialog class="portal-modal" id="portal-confirm" aria-labelledby="confirm-title"><div class="portal-modal__content"><h2 id="confirm-title">Xác nhận</h2><p id="confirm-description">Bạn có chắc chắn?</p><div class="portal-modal__actions"><button type="button" class="btn btn-outline" id="confirm-no">Hủy</button><button type="button" class="btn" id="confirm-yes">Xác nhận</button></div></div></dialog>
+</body></html>
