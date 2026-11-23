@@ -140,7 +140,8 @@ function initializePortalNavigation() {
 function initializeCandidateSearch() {
   const searchForm = document.querySelector(".hero-search");
   const jobList = document.querySelector(".job-list");
-  if (!searchForm || !jobList) return;
+  // Trang dùng API do candidate.js xử lý; không áp dụng bộ lọc HTML mẫu.
+  if (!searchForm || !jobList || jobList.dataset.dynamicJobs === "true") return;
 
   const cards = Array.from(jobList.querySelectorAll(".job-card"));
   const queryInput = searchForm.querySelector('input[type="search"]');

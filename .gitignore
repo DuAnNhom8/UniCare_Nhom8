@@ -43,3 +43,6 @@ backend/database/*.db
 .vscode/
 *.swp
 *.swo
+
+# CV uploads private (never commit personal documents)
+backend/private_uploads/

@@ -7,13 +7,12 @@ from sqlalchemy import Column, Integer, String, Boolean, Enum, DateTime, func
 from sqlalchemy.orm import relationship
 from backend.app.core.database import Base
 
-
 class User(Base):
     __tablename__ = "users"
 
     user_id = Column(Integer, primary_key=True, autoincrement=True, comment="Mã người dùng")
     email = Column(String(100), unique=True, nullable=False, index=True, comment="Email đăng nhập")
-    password_hash = Column(String(255), nullable=False, comment="Mật khẩu mã hóa BCrypt")
+    password_hash = Column(String(255), nullable=False, comment="Mật khẩu băm (PBKDF2-SHA256 cho đăng ký mới)")
     role = Column(
         Enum("CANDIDATE", "EMPLOYER", "ADMIN", name="user_role_enum"),
         nullable=False,
@@ -22,14 +21,8 @@ class User(Base):
     is_active = Column(Boolean, default=True, comment="Trạng thái tài khoản (True: Hoạt động, False: Khóa)")
     created_at = Column(DateTime, server_default=func.now(), comment="Thời gian tạo tài khoản")
 
-    # Mối quan hệ 1-1 với Doanh nghiệp (nếu là EMPLOYER)
-    company = relationship("Company", back_populates="employer", uselist=False, cascade="all, delete-orphan")
-
-    # Mối quan hệ 1-1 với Hồ sơ ứng viên (nếu là CANDIDATE)
-    candidate = relationship("Candidate", back_populates="user", uselist=False, cascade="all, delete-orphan")
-
-    # Mối quan hệ 1-nhiều với Đơn ứng tuyển (nếu là CANDIDATE nộp đơn)
+    cvs = relationship("CV", back_populates="candidate", cascade="all, delete-orphan")
     applications = relationship("Application", back_populates="candidate", cascade="all, delete-orphan")
 
-    def __repr__(self):
-        return f"<User(id={self.user_id}, email='{self.email}', role='{self.role}', active={self.is_active})>"
+    # Mối quan hệ 1-1 với Doanh nghiệp (nếu là EMPLOYER)
+    company = relationship("Company", back_populates="employer", uselist=False, cascade="all, delete-orphan")

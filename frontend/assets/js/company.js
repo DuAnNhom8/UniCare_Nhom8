@@ -4,9 +4,12 @@
  * Task: T85FE99 & T05FE9A - Xây dựng chức năng doanh nghiệp & tin tuyển dụng
  */
 
-const API_BASE_URL = (typeof window !== 'undefined' && window.location.protocol && window.location.protocol.startsWith('http'))
-  ? `${window.location.origin}/api`
-  : 'http://localhost:8000/api';
+const API_BASE_URL = (
+  ['localhost', '127.0.0.1'].includes(window.location.hostname) &&
+  window.location.port && window.location.port !== '8000'
+    ? 'http://127.0.0.1:8000/api'
+    : `${window.location.origin}/api`
+);
 
 // Dữ liệu mẫu doanh nghiệp mặc định
 const DEFAULT_COMPANY_DATA = {
@@ -914,104 +917,3 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
-
-// Ứng dụng tích hợp quản lý hồ sơ ứng viên cho Nhà tuyển dụng
-document.addEventListener('DOMContentLoaded', () => {
-  initCompanyApplications();
-});
-
-async function initCompanyApplications() {
-  const tableBody = document.querySelector('.portal-table tbody');
-  const kicker = document.querySelector('.portal-kicker');
-  if (!tableBody || !kicker || !kicker.textContent.includes('APPLICATIONS')) return;
-
-  const companyId = 1;
-  try {
-    const apps = (typeof UniCareerAPI !== 'undefined')
-      ? await UniCareerAPI.company.getApplications(companyId)
-      : null;
-
-    if (Array.isArray(apps) && apps.length > 0) {
-      // Cập nhật số liệu thống kê
-      const statBoxes = document.querySelectorAll('.portal-stats .portal-stat');
-      if (statBoxes.length >= 4) {
-        const total = apps.length;
-        const reviewing = apps.filter(a => a.status === 'REVIEWING').length;
-        const accepted = apps.filter(a => a.status === 'ACCEPTED').length;
-        const received = apps.filter(a => a.status === 'RECEIVED').length;
-
-        statBoxes[0].querySelector('.portal-stat__value').textContent = total;
-        statBoxes[1].querySelector('.portal-stat__value').textContent = reviewing;
-        statBoxes[2].querySelector('.portal-stat__value').textContent = accepted;
-        statBoxes[3].querySelector('.portal-stat__value').textContent = received;
-      }
-
-      const statusMap = {
-        'RECEIVED': { label: 'Đã tiếp nhận', class: 'status--received' },
-        'REVIEWING': { label: 'Đang xem xét', class: 'status--reviewing' },
-        'ACCEPTED': { label: 'Đã chấp nhận', class: 'status--accepted' },
-        'REJECTED': { label: 'Từ chối', class: 'status--rejected' }
-      };
-
-      tableBody.innerHTML = apps.map(app => {
-        const st = statusMap[app.status] || { label: app.status, class: 'status--received' };
-        const appliedDate = app.applied_at ? formatDate(app.applied_at) : 'Hôm nay';
-
-        return `
-          <tr>
-            <td>
-              <strong>${escapeHtml(app.candidate_name || 'Ứng viên')}</strong><br>
-              <small style="color:#64748b;">${escapeHtml(app.candidate_email || '')} · ${escapeHtml(app.candidate_phone || '')}</small>
-              ${app.candidate_university ? `<br><small style="color:#0284c7;">🏫 ${escapeHtml(app.candidate_university)}</small>` : ''}
-            </td>
-            <td>
-              <strong>${escapeHtml(app.job_title)}</strong>
-              ${app.ai_match_score ? `<br><small style="color:#10b981;font-weight:600;">✧ AI Match: ${app.ai_match_score}%</small>` : ''}
-            </td>
-            <td>${appliedDate}</td>
-            <td>
-              <select class="app-status-select" data-app-id="${app.application_id}" style="padding:4px 8px;border-radius:6px;font-size:13px;border:1px solid #cbd5e1;background:#fff;">
-                <option value="RECEIVED" ${app.status === 'RECEIVED' ? 'selected' : ''}>Đã tiếp nhận</option>
-                <option value="REVIEWING" ${app.status === 'REVIEWING' ? 'selected' : ''}>Đang xem xét</option>
-                <option value="ACCEPTED" ${app.status === 'ACCEPTED' ? 'selected' : ''}>Đã chấp nhận</option>
-                <option value="REJECTED" ${app.status === 'REJECTED' ? 'selected' : ''}>Từ chối</option>
-              </select>
-            </td>
-            <td>
-              <button class="btn btn-outline btn-sm view-cv-btn" data-cv="${escapeHtml(app.candidate_cv_url || '')}">Xem CV</button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      // Sự kiện thay đổi trạng thái đơn
-      tableBody.querySelectorAll('.app-status-select').forEach(select => {
-        select.addEventListener('change', async (e) => {
-          const appId = parseInt(select.getAttribute('data-app-id'));
-          const nextStatus = select.value;
-          try {
-            await UniCareerAPI.company.updateApplicationStatus(companyId, appId, nextStatus);
-            alert(`✅ Đã cập nhật trạng thái đơn ứng tuyển thành công!`);
-          } catch (err) {
-            alert('❌ Lỗi cập nhật: ' + err.message);
-          }
-        });
-      });
-
-      // Sự kiện xem CV
-      tableBody.querySelectorAll('.view-cv-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const cvUrl = btn.getAttribute('data-cv');
-          if (cvUrl) {
-            window.open(cvUrl, '_blank');
-          } else {
-            alert('Ứng viên đã nộp hồ sơ trực tuyến theo thông tin trên bảng.');
-          }
-        });
-      });
-    }
-  } catch (err) {
-    console.warn('Lỗi kết nối API ứng tuyển doanh nghiệp:', err.message);
-  }
-}
-

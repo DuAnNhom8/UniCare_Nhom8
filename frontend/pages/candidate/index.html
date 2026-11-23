@@ -9,8 +9,8 @@
   <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/candidate.css">
-  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/candidate.js" defer></script>
 </head>
 
@@ -37,14 +37,14 @@
         <h1>Tìm đúng cơ hội.<br><span>Bắt đầu sự nghiệp.</span></h1>
         <p>Khám phá việc làm và thực tập từ các doanh nghiệp. Lọc theo ngành nghề, địa điểm và kỹ năng để chọn công việc
           phù hợp.</p>
-        <form class="hero-search" action="#job-list">
+        <form class="hero-search" id="job-search-form" action="#job-list">
           <label class="search-input-wrap"><span aria-hidden="true">⌕</span><input name="q" type="search"
               placeholder="Chức danh, kỹ năng, từ khóa..." aria-label="Từ khóa"></label>
           <label class="search-location"><span aria-hidden="true">⌖</span><select name="location" aria-label="Địa điểm">
-              <option>Tất cả địa điểm</option>
-              <option>TP. Hồ Chí Minh</option>
-              <option>Hà Nội</option>
-              <option>Đà Nẵng</option>
+              <option value="">Tất cả địa điểm</option>
+              <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+              <option value="Hà Nội">Hà Nội</option>
+              <option value="Đà Nẵng">Đà Nẵng</option>
             </select></label>
           <button class="btn btn-lg" type="submit">Tìm việc ngay</button>
         </form>
@@ -68,86 +68,37 @@
               <h3>Bộ lọc công việc</h3><a href="index.html">Xóa tất cả</a>
             </div>
             <div class="field"><label for="job-type">Loại hình công việc</label><select id="job-type">
-                <option>Tất cả loại hình</option>
-                <option>Thực tập</option>
-                <option>Bán thời gian</option>
+                <option value="">Tất cả loại hình</option>
+                <option value="INTERNSHIP">Thực tập</option>
+                <option value="PART_TIME">Bán thời gian</option>
+                <option value="FULL_TIME">Toàn thời gian</option>
               </select></div>
             <div class="field"><label for="job-place">Địa điểm</label><select id="job-place">
-                <option>Tất cả địa điểm</option>
-                <option>TP. Hồ Chí Minh</option>
-                <option>Hà Nội</option>
-                <option>Hybrid</option>
+                <option value="">Tất cả địa điểm</option>
+                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                <option value="Hà Nội">Hà Nội</option>
+                <option value="Hybrid">Hybrid</option>
               </select></div>
             <div class="field"><label for="job-salary">Mức lương</label><select id="job-salary">
-                <option>Tất cả mức lương</option>
-                <option>Dưới 5 triệu</option>
-                <option>Thỏa thuận</option>
+                <option value="">Tất cả mức lương</option>
+                <option value="paid">Có hỗ trợ lương</option>
+                <option value="negotiable">Thỏa thuận</option>
               </select></div>
-            <p class="filter-note">Bộ lọc áp dụng trên các tin mẫu đang hiển thị.</p>
+            <p class="filter-note">Kết quả được lọc trực tiếp từ cơ sở dữ liệu.</p>
           </aside>
           <div class="list-section">
             <div class="list-toolbar">
               <div>
-                <h3 data-job-count aria-live="polite">4 cơ hội đang tuyển</h3>
-                <p>Tin đăng minh họa</p>
+                <h3 data-job-count aria-live="polite">Đang tải việc làm...</h3>
+                <p>Chỉ hiển thị tin đang tuyển, đã duyệt, còn hạn</p>
               </div><select id="job-sort" aria-label="Sắp xếp kết quả">
-                <option value="default">Mặc định</option>
+                <option value="latest">Mới nhất</option>
                 <option value="deadline">Hạn ứng tuyển gần nhất</option>
               </select>
             </div>
-            <div class="job-list">
-              <article class="job-card card">
-                <div class="company-logo">T</div>
-                <div>
-                  <p class="company-name">TechNova</p>
-                  <h3><a href="job-detail.html">Backend Developer Intern</a></h3>
-                  <div class="job-meta"><span>⌖ TP. Hồ Chí Minh</span><span>◷ Thực tập</span><span>3–5
-                      triệu/tháng</span></div>
-                  <div class="job-tags"><span class="tag tag--blue">Python</span><span class="tag">FastAPI</span><span
-                      class="tag">MySQL</span></div>
-                </div>
-                <div class="job-actions"><a class="btn btn-outline" href="job-detail.html">Xem chi tiết</a><span
-                    class="deadline">Hạn: 30/11/2026</span></div>
-              </article>
-              <article class="job-card card">
-                <div class="company-logo company-logo--purple">B</div>
-                <div>
-                  <p class="company-name">BluePeak Digital</p>
-                  <h3><a href="job-detail-frontend.html">Frontend Developer Intern</a></h3>
-                  <div class="job-meta"><span>⌖ Hybrid</span><span>◷ Thực tập</span><span>Lương thỏa thuận</span></div>
-                  <div class="job-tags"><span class="tag tag--blue">HTML/CSS</span><span
-                      class="tag">JavaScript</span><span class="tag">UI</span></div>
-                </div>
-                <div class="job-actions"><a class="btn btn-outline" href="job-detail-frontend.html">Xem chi
-                    tiết</a><span class="deadline">Hạn: 15/12/2026</span></div>
-              </article>
-              <article class="job-card card">
-                <div class="company-logo company-logo--green">N</div>
-                <div>
-                  <p class="company-name">NextStep Labs</p>
-                  <h3><a href="job-detail-data.html">Data Analyst Intern</a></h3>
-                  <div class="job-meta"><span>⌖ Hà Nội</span><span>◷ Thực tập</span><span>3–5 triệu/tháng</span></div>
-                  <div class="job-tags"><span class="tag tag--green">SQL</span><span class="tag">Excel</span><span
-                      class="tag">Phân tích dữ liệu</span></div>
-                </div>
-                <div class="job-actions"><a class="btn btn-outline" href="job-detail-data.html">Xem chi tiết</a><span
-                    class="deadline">Hạn: 20/12/2026</span></div>
-              </article>
-              <article class="job-card card">
-                <div class="company-logo company-logo--orange">C</div>
-                <div>
-                  <p class="company-name">CloudBridge</p>
-                  <h3><a href="job-detail-business.html">Business Analyst Intern</a></h3>
-                  <div class="job-meta"><span>⌖ TP. Hồ Chí Minh</span><span>◷ Thực tập</span><span>3–5
-                      triệu/tháng</span></div>
-                  <div class="job-tags"><span class="tag">Business</span><span class="tag">Excel</span><span
-                      class="tag">Communication</span></div>
-                </div>
-                <div class="job-actions"><a class="btn btn-outline" href="job-detail-business.html">Xem chi
-                    tiết</a><span class="deadline">Hạn: 22/12/2026</span></div>
-              </article>
-            </div>
-            <p class="jobs-empty" hidden>Không tìm thấy cơ hội phù hợp. Hãy thử thay đổi từ khóa hoặc bộ lọc.</p>
+            <div class="job-list" id="public-job-list" data-dynamic-jobs="true" aria-live="polite"></div>
+            <p class="jobs-empty" id="job-feedback" role="status">Đang tải dữ liệu từ API...</p>
+            <div class="pagination"><button class="btn btn-outline" id="job-load-more" type="button" hidden>Xem thêm việc làm</button></div>
           </div>
         </div>
       </div>
@@ -156,7 +107,7 @@
   <footer class="site-footer">
     <div class="container footer-layout">
       <div><strong>UniCareer</strong>
-        <p>Giao diện demo · Tìm kiếm và bộ lọc áp dụng trên các tin mẫu đang hiển thị.</p>
+        <p>Danh sách lấy từ API FastAPI kết nối cơ sở dữ liệu MySQL.</p>
       </div>
       <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="../auth/login.html">Đăng nhập</a></div>
     </div>

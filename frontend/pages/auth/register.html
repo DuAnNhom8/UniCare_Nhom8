@@ -9,8 +9,8 @@
   <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/auth.css">
-  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/auth.js" defer></script>
 </head>
 
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <form action="#" method="get">
+        <form id="register-form">
           <fieldset class="register-role-fieldset">
             <legend class="register-role-legend">
               Bạn tham gia UniCareer với vai trò nào?
@@ -69,10 +69,6 @@
 
           <div class="portal-grid-2">
             <div class="field">
-              <label for="name">Họ và tên</label>
-              <input id="name" name="name" type="text" autocomplete="name" placeholder="Nhập họ và tên" required>
-            </div>
-            <div class="field">
               <label for="email">Email</label>
               <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
             </div>
@@ -90,9 +86,10 @@
           </div>
 
           <div class="portal-quick-actions register-actions">
-            <button class="btn btn-lg" type="button" disabled>Tạo tài khoản</button>
-            <span class="portal-help">Đăng ký sẽ khả dụng sau khi kết nối dịch vụ xác thực.</span>
+            <button class="btn btn-lg" type="submit">Tạo tài khoản</button>
+            <span class="portal-help">Admin không thể đăng ký công khai.</span>
           </div>
+          <p id="auth-feedback" class="session-feedback" role="status" aria-live="polite"></p>
         </form>
 
         <div class="portal-divider"></div>

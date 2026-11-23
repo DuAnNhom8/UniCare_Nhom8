@@ -12,7 +12,9 @@ from backend.app.schemas.job import (
     JobCreate,
     JobUpdate,
     JobStatusUpdate,
-    JobResponse
+    JobResponse,
+    PublicJobResponse,
+    PublicJobList
 )
 from backend.app.services import job_service
 
@@ -62,7 +64,6 @@ def list_job_posts(
     company_id: Optional[int] = Query(None, description="Lọc theo mã doanh nghiệp"),
     status: Optional[str] = Query(None, description="Lọc theo trạng thái (ACTIVE, CLOSED, HIDDEN)"),
     keyword: Optional[str] = Query(None, description="Tìm kiếm từ khóa trong tiêu đề, địa điểm, mô tả"),
-    search: Optional[str] = Query(None, description="Từ khóa tìm kiếm (alias)"),
     job_type: Optional[str] = Query(None, description="Lọc theo loại hình công việc"),
     db: Session = Depends(get_db)
 ):
@@ -70,16 +71,48 @@ def list_job_posts(
     Lấy danh sách các tin tuyển dụng:
     Hỗ trợ tìm kiếm, phân trang và lọc theo trạng thái hiển thị (ACTIVE, CLOSED, HIDDEN).
     """
-    search_term = keyword or search
     return job_service.get_jobs(
         db,
         skip=skip,
         limit=limit,
         company_id=company_id,
         status=status,
-        keyword=search_term,
+        keyword=keyword,
         job_type=job_type
     )
+
+@router.get(
+    "/public",
+    response_model=PublicJobList,
+    summary="Danh sách việc làm đang tuyển đã được duyệt (ứng viên)"
+)
+def public_job_list(
+    keyword: Optional[str] = Query(None, max_length=100),
+    location: Optional[str] = Query(None, max_length=100),
+    job_type: Optional[str] = Query(None, pattern="^(FULL_TIME|PART_TIME|INTERNSHIP)$"),
+    salary: Optional[str] = Query(None, pattern="^(paid|negotiable)$"),
+    sort: str = Query("latest", pattern="^(latest|deadline)$"),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(12, ge=1, le=50),
+    db: Session = Depends(get_db),
+):
+    return job_service.list_public_jobs(
+        db, keyword=keyword, location=location, job_type=job_type,
+        salary=salary, sort=sort, skip=skip, limit=limit
+    )
+
+
+@router.get(
+    "/public/{job_id}",
+    response_model=PublicJobResponse,
+    summary="Chi tiết việc làm công khai (ứng viên)"
+)
+def public_job_detail(job_id: int, db: Session = Depends(get_db)):
+    job = job_service.get_public_job(db, job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Tin không tồn tại hoặc không còn được công khai")
+    return job
+
 
 @router.get(
     "/{job_id}",

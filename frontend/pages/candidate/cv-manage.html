@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/candidate.css">
   <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/api.js" defer></script>
+  <script src="../../assets/js/candidate.js" defer></script>
 </head>
 
 <body>
@@ -21,53 +23,29 @@
         <a href="my-applications.html">Đơn ứng tuyển</a>
         <a class="is-active" href="cv-manage.html" aria-current="page">Hồ sơ & CV</a>
       </nav>
-      <div class="nav-side"><span class="demo-label">DEMO · ỨNG VIÊN</span><a class="btn btn-outline"
+      <div class="nav-side"><span class="demo-label">ỨNG TUYỂN</span><a class="btn btn-outline"
           href="../auth/login.html">Đăng nhập</a></div>
     </div>
   </header>
   <main class="page">
     <div class="container">
-      <nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Việc làm</a><span>/</span><span class="current">Hồ
-          sơ & CV</span></nav>
-      <div class="history-header">
-        <div class="screen-heading">
-          <h1>Hồ sơ & CV của tôi</h1>
-          <p>Quản lý thông tin ứng viên và chuẩn bị hồ sơ trước khi ứng tuyển.</p>
-        </div>
-        <a class="btn btn-outline" href="index.html">Khám phá việc làm</a>
-      </div>
+      <nav class="crumbs"><a href="index.html">Việc làm</a><span>/</span><span class="current">Hồ sơ &amp; CV</span></nav>
+      <div class="history-header"><div class="screen-heading"><h1>CV của tôi</h1><p>Tải lên CV PDF để chuẩn bị cho việc ứng tuyển.</p></div>
+        <a class="btn btn-outline" href="index.html">Tìm việc làm</a></div>
       <div class="cv-layout">
         <section class="card">
-          <div class="mini-profile">
-            <div class="company-logo">NA</div>
-            <h3>Nguyễn Minh Anh</h3>
-            <p>Backend Developer Intern</p>
-            <p>Đại học Công nghệ · Công nghệ thông tin</p>
-            <p><strong>Kỹ năng:</strong> Python, FastAPI, MySQL</p>
-          </div>
-          <div class="cv-file-row"><span class="company-logo company-logo--orange">PDF</span>
-            <div><strong>NguyenMinhAnh_CV.pdf</strong>
-              <p class="muted">CV hiện tại · Đang sử dụng</p>
-            </div>
-          </div>
+          <h2>Danh sách CV đã lưu</h2>
+          <p id="cv-profile-email" class="muted">Đang kiểm tra tài khoản...</p>
+          <p id="cv-feedback" class="session-feedback" aria-live="polite" role="status"></p>
+          <div id="saved-cvs" class="application-list"></div>
         </section>
         <section class="card">
-          <h2>Cập nhật hồ sơ</h2>
-          <p>Thông tin dưới đây là dữ liệu minh họa cho giao diện.</p>
-          <form action="#" method="get">
-            <div class="field"><label for="candidate-name">Họ và tên</label><input id="candidate-name" name="name"
-                value="Nguyễn Minh Anh"></div>
-            <div class="field"><label for="candidate-email">Email</label><input id="candidate-email" type="email"
-                name="email" value="minhanh@example.com"></div>
-            <div class="field"><label for="candidate-school">Trường học</label><input id="candidate-school"
-                name="school" value="Đại học Công nghệ"></div>
-            <div class="field"><label for="candidate-skills">Kỹ năng</label><input id="candidate-skills" name="skills"
-                value="Python, FastAPI, MySQL"></div>
-            <div class="field"><label for="cv-file">Tệp CV</label><input id="cv-file" type="file"
-                accept=".pdf,.doc,.docx"><small>Hỗ trợ định dạng PDF, DOC hoặc DOCX.</small></div>
-            <div class="field"><label for="cv-summary">Giới thiệu</label><textarea id="cv-summary" name="summary"
-                rows="5">Sinh viên Công nghệ thông tin, yêu thích phát triển ứng dụng web và API.</textarea></div>
-            <button class="btn" type="button" disabled>Lưu hồ sơ (bản demo)</button>
+          <h2>Tải CV mới</h2>
+          <p>CV được lưu ngoài thư mục web công khai và chỉ tài khoản của bạn có thể tải về.</p>
+          <form id="cv-upload-form" hidden>
+            <div class="field"><label for="cv-file">Chọn tệp CV PDF</label><input id="cv-file" type="file" accept=".pdf,application/pdf" required>
+            <small>Tối đa 5 MB. Chỉ chấp nhận PDF.</small></div>
+            <button class="btn" id="cv-upload-submit" type="submit">Lưu CV</button>
           </form>
         </section>
       </div>
@@ -76,7 +54,7 @@
   <footer class="site-footer">
     <div class="container footer-layout">
       <div><strong>UniCareer</strong>
-        <p>Giao diện demo · Chưa kết nối dịch vụ lưu hồ sơ.</p>
+        <p>Các thông tin học vấn và kỹ năng sẽ được phát triển trong phân hệ hồ sơ cá nhân.</p>
       </div>
       <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="index.html">Tìm việc</a></div>
     </div>

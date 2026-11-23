@@ -177,3 +177,60 @@ def delete_job(db: Session, job_id: int) -> bool:
     db.delete(db_job)
     db.commit()
     return True
+
+
+def _public_jobs_query(db: Session):
+    """Điều kiện hiển thị công khai phải áp dụng cả cho danh sách và chi tiết."""
+    from sqlalchemy.orm import joinedload
+    return (db.query(JobPost)
+            .options(joinedload(JobPost.company))
+            .join(Company, Company.company_id == JobPost.company_id)
+            .filter(JobPost.status == 'ACTIVE',
+                    JobPost.approval_status == 'APPROVED',
+                    JobPost.deadline >= date.today()))
+
+
+def list_public_jobs(
+    db: Session,
+    *,
+    keyword: Optional[str] = None,
+    location: Optional[str] = None,
+    job_type: Optional[str] = None,
+    salary: Optional[str] = None,
+    sort: str = 'latest',
+    skip: int = 0,
+    limit: int = 12,
+) -> dict:
+    """Tìm kiếm/lọc ở CSDL trước khi phân trang, trả total chính xác."""
+    query = _public_jobs_query(db)
+    if keyword and keyword.strip():
+        # Escape các ký tự wildcard để % và _ được hiểu là chữ người dùng nhập.
+        cleaned = keyword.strip().replace('\\', '\\\\').replace('%', '\\%').replace('_', '\\_')
+        search = f'%{cleaned}%'
+        query = query.filter(or_(
+            JobPost.title.ilike(search, escape='\\'),
+            JobPost.description.ilike(search, escape='\\'),
+            JobPost.requirements.ilike(search, escape='\\'),
+            Company.company_name.ilike(search, escape='\\'),
+        ))
+    if location and location.strip():
+        query = query.filter(JobPost.location.ilike(f'%{location.strip()}%'))
+    if job_type:
+        query = query.filter(JobPost.job_type == job_type)
+    # "negotiable" và "paid" không diễn giải chuỗi khoảng lương thành số sai lệch.
+    if salary == 'negotiable':
+        query = query.filter(JobPost.salary_range.ilike('%thỏa thuận%'))
+    elif salary == 'paid':
+        query = query.filter(JobPost.salary_range.isnot(None),
+                             ~JobPost.salary_range.ilike('%thỏa thuận%'))
+    total = query.count()
+    if sort == 'deadline':
+        query = query.order_by(JobPost.deadline.asc(), JobPost.job_id.desc())
+    else:
+        query = query.order_by(JobPost.created_at.desc(), JobPost.job_id.desc())
+    return {'items': query.offset(skip).limit(limit).all(), 'total': total,
+            'skip': skip, 'limit': limit}
+
+
+def get_public_job(db: Session, job_id: int) -> Optional[JobPost]:
+    return _public_jobs_query(db).filter(JobPost.job_id == job_id).first()

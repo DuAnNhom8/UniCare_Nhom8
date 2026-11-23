@@ -50,5 +50,21 @@ class JobPost(Base):
     company = relationship("Company", back_populates="jobs")
     applications = relationship("Application", back_populates="job", cascade="all, delete-orphan")
 
+    @property
+    def company_name(self):
+        return self.company.company_name if self.company else None
+
+    @property
+    def company_description(self):
+        return self.company.description if self.company else None
+
+    @property
+    def company_website(self):
+        return self.company.website if self.company else None
+
+    @property
+    def company_industry(self):
+        return self.company.industry if self.company else None
+
     def __repr__(self):
         return f"<JobPost(id={self.job_id}, title='{self.title}', status='{self.status}')>"

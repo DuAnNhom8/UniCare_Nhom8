@@ -1,40 +1,43 @@
-"""
-Pydantic Schemas cho xác thực và quản lý tài khoản (Authentication)
-Theo đặc tả SRS UniCareer mục 10.2.1 & 11.2 (Authentication Module)
-"""
-
-from typing import Optional
-from datetime import datetime
-from pydantic import BaseModel, Field
+"""Input/Output xác thực, không bao giờ trả password_hash."""
+import re
+from pydantic import BaseModel, Field, field_validator
 
 
-class UserRegister(BaseModel):
-    email: str = Field(..., min_length=5, max_length=100, description="Email đăng nhập duy nhất")
-    password: str = Field(..., min_length=6, description="Mật khẩu tối thiểu 6 ký tự")
-    role: str = Field("CANDIDATE", description="Vai trò: CANDIDATE, EMPLOYER, ADMIN")
-    full_name: Optional[str] = Field(None, description="Họ tên sinh viên (nếu là CANDIDATE)")
-    company_name: Optional[str] = Field(None, description="Tên công ty (nếu là EMPLOYER)")
+class RegisterRequest(BaseModel):
+    email: str = Field(..., max_length=100)
+    password: str = Field(..., min_length=8, max_length=128)
+    role: str = 'CANDIDATE'
+
+    @field_validator('email')
+    @classmethod
+    def email_format(cls, value: str) -> str:
+        value = value.strip().lower()
+        if not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+', value):
+            raise ValueError('Email không hợp lệ')
+        return value
+
+    @field_validator('role')
+    @classmethod
+    def only_public_roles(cls, value: str) -> str:
+        value = value.upper()
+        if value not in ('CANDIDATE', 'EMPLOYER'):
+            raise ValueError('Chỉ được đăng ký CANDIDATE hoặc EMPLOYER')
+        return value
 
 
-class UserLogin(BaseModel):
-    email: str = Field(..., min_length=5, max_length=100, description="Email đăng nhập")
-    password: str = Field(..., description="Mật khẩu")
+class LoginRequest(BaseModel):
+    email: str
+    password: str
 
 
-class UserResponse(BaseModel):
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = 'bearer'
+    expires_in: int = 7200
+
+
+class CurrentUser(BaseModel):
     user_id: int
     email: str
     role: str
-    is_active: bool
-    created_at: Optional[datetime] = None
-
-    model_config = {
-        "from_attributes": True
-    }
-
-
-class LoginResponse(BaseModel):
-    access_token: str
-    token_type: str = "bearer"
-    user: UserResponse
-    detail: Optional[str] = None
+    model_config = {'from_attributes': True}

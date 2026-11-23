@@ -995,3 +995,14 @@
         font-size: 25px
     }
 }
+/* Sprint 2/3: nội dung lấy từ API, không hiển thị panel trống khi đang tải. */
+#public-job-detail[hidden], #job-load-more[hidden] { display: none !important; }
+.job-text-block { white-space: pre-line; overflow-wrap: anywhere; }
+#job-detail-feedback { margin: 18px 0; }
+
+/* Sprint 3: phản hồi API, nút ứng tuyển và danh sách CV */
+.session-feedback { font-size: 14px; margin: 14px 0; color: #34557f; overflow-wrap: anywhere; }
+.session-feedback.is-error { color: #b82a40; }
+.session-feedback.is-success { color: #087f53; }
+.cv-record { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; border-bottom: 1px solid #edf0f5; padding: 12px 0; }
+.cv-record strong { overflow-wrap: anywhere; }

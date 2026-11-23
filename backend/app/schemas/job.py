@@ -55,3 +55,17 @@ class JobResponse(JobBase):
     model_config = {
         "from_attributes": True
     }
+
+
+# API chỉ-đọc dành cho ứng viên: không để lộ tin chưa duyệt/đã đóng.
+class PublicJobResponse(JobResponse):
+    company_description: Optional[str] = None
+    company_website: Optional[str] = None
+    company_industry: Optional[str] = None
+
+
+class PublicJobList(BaseModel):
+    items: list[PublicJobResponse]
+    total: int = Field(..., ge=0)
+    skip: int = Field(..., ge=0)
+    limit: int = Field(..., ge=1)
