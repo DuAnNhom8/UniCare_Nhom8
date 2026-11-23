@@ -14,7 +14,8 @@ TEST_FILES = [
     "backend/test_jobs_api.py",
     "backend/test_t05fea1_tuyen_dung.py",
     "backend/test_t05fead_kiem_tra_doanh_nghiep.py",
-    "backend/test_t05feb0_tich_hop_he_thong.py"
+    "backend/test_t05feb0_tich_hop_he_thong.py",
+    "backend/test_t05feb5_kiem_thu_tong_the.py"
 ]
 
 def main():
@@ -48,7 +49,7 @@ def main():
 
     print("\n" + "=" * 70)
     if all_passed:
-        print(f"🎉 TẤT CẢ 5 BỘ KIỂM THỬ ĐỀU ĐẠT CHUẨN (100% PASSED)!")
+        print(f"🎉 TẤT CẢ {len(TEST_FILES)} BỘ KIỂM THỬ ĐỀU ĐẠT CHUẨN (100% PASSED)!")
     else:
         print("⚠️ CÓ KIỂM THỬ KHÔNG ĐẠT. VUI LÒNG KIỂM TRA LẠI.")
     print("=" * 70)
