@@ -7,6 +7,7 @@ from sqlalchemy import Column, Integer, String, Boolean, Enum, DateTime, func
 from sqlalchemy.orm import relationship
 from backend.app.core.database import Base
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -23,3 +24,12 @@ class User(Base):
 
     # Mối quan hệ 1-1 với Doanh nghiệp (nếu là EMPLOYER)
     company = relationship("Company", back_populates="employer", uselist=False, cascade="all, delete-orphan")
+
+    # Mối quan hệ 1-1 với Hồ sơ ứng viên (nếu là CANDIDATE)
+    candidate = relationship("Candidate", back_populates="user", uselist=False, cascade="all, delete-orphan")
+
+    # Mối quan hệ 1-nhiều với Đơn ứng tuyển (nếu là CANDIDATE nộp đơn)
+    applications = relationship("Application", back_populates="candidate", cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f"<User(id={self.user_id}, email='{self.email}', role='{self.role}', active={self.is_active})>"

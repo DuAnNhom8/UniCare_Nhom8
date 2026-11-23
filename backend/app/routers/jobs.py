@@ -62,6 +62,7 @@ def list_job_posts(
     company_id: Optional[int] = Query(None, description="Lọc theo mã doanh nghiệp"),
     status: Optional[str] = Query(None, description="Lọc theo trạng thái (ACTIVE, CLOSED, HIDDEN)"),
     keyword: Optional[str] = Query(None, description="Tìm kiếm từ khóa trong tiêu đề, địa điểm, mô tả"),
+    search: Optional[str] = Query(None, description="Từ khóa tìm kiếm (alias)"),
     job_type: Optional[str] = Query(None, description="Lọc theo loại hình công việc"),
     db: Session = Depends(get_db)
 ):
@@ -69,13 +70,14 @@ def list_job_posts(
     Lấy danh sách các tin tuyển dụng:
     Hỗ trợ tìm kiếm, phân trang và lọc theo trạng thái hiển thị (ACTIVE, CLOSED, HIDDEN).
     """
+    search_term = keyword or search
     return job_service.get_jobs(
         db,
         skip=skip,
         limit=limit,
         company_id=company_id,
         status=status,
-        keyword=keyword,
+        keyword=search_term,
         job_type=job_type
     )
 

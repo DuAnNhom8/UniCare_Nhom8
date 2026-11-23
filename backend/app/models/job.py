@@ -48,6 +48,7 @@ class JobPost(Base):
 
     # Mối quan hệ
     company = relationship("Company", back_populates="jobs")
+    applications = relationship("Application", back_populates="job", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<JobPost(id={self.job_id}, title='{self.title}', status='{self.status}')>"
