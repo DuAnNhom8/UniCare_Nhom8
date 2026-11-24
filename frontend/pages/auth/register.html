@@ -9,7 +9,9 @@
   <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/auth.css">
+  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/auth.js" defer></script>
 </head>
 
 <body>
@@ -22,7 +24,7 @@
         <a href="../../index.html#employers">Dành cho doanh nghiệp</a>
       </nav>
       <div class="nav-side">
-        <span class="demo-label">UNICAREER · DEMO</span>
+        <span class="demo-label">UNICAREER · THÀNH VIÊN</span>
         <a class="btn btn-outline" href="login.html">Đăng nhập</a>
       </div>
     </div>
@@ -45,7 +47,7 @@
           </div>
         </div>
 
-        <form action="#" method="get">
+        <form id="register-form">
           <fieldset class="register-role-fieldset">
             <legend class="register-role-legend">
               Bạn tham gia UniCareer với vai trò nào?
@@ -88,8 +90,8 @@
           </div>
 
           <div class="portal-quick-actions register-actions">
-            <button class="btn btn-lg" type="button" disabled>Tạo tài khoản</button>
-            <span class="portal-help">Đăng ký sẽ khả dụng sau khi kết nối dịch vụ xác thực.</span>
+            <button class="btn btn-lg" type="submit">Tạo tài khoản</button>
+            <span id="register-status" class="portal-help" role="status" aria-live="polite"></span>
           </div>
         </form>
 
@@ -99,7 +101,6 @@
       </section>
     </div>
   </main>
-
   <footer class="site-footer">
     <div class="container footer-layout">
       <div><strong>UniCareer</strong>

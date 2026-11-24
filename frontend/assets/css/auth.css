@@ -13,15 +13,6 @@
   padding: clamp(22px, 5vw, 42px);
 }
 
-.auth-card--forgot {
-  max-width: 540px;
-  margin: 55px auto;
-}
-
-.auth-forgot-link {
-  text-align: right;
-}
-
 .auth-account-prompt {
   margin-top: 20px;
 }

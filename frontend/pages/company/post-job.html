@@ -8,7 +8,9 @@
     <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/company.css">
+    <script src="../../assets/js/api.js" defer></script>
     <script src="../../assets/js/site-ui.js" defer></script>
+    <script src="../../assets/js/company.js" defer></script>
 </head>
 
 <body>
@@ -26,16 +28,15 @@
                 <div class="portal-menu-spacer"></div><a href="../../index.html"><span
                         class="nav-emoji">↗</span><span>Về trang chủ</span></a>
             </nav>
-            <div class="portal-sidebottom"><span class="portal-avatar">TN</span>
-                <div><strong>TechNova</strong><small>Nhà tuyển dụng · Demo</small></div>
+            <div class="portal-sidebottom"><span class="portal-avatar">DN</span>
+                <div><strong>Doanh nghiệp</strong><small>Nhà tuyển dụng</small></div>
             </div>
         </aside>
         <div class="portal-main">
             <header class="portal-topbar">
                 <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
                             class="brand-mark">U</span>UniCareer</a><span>Employer Workspace</span></div>
-                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
-                        class="portal-topbar__link" href="manage-jobs.html">Tin tuyển dụng ↗</a></div>
+                <div class="portal-topbar-right"><a class="portal-topbar__link" href="manage-jobs.html">Tin tuyển dụng ↗</a></div>
             </header>
             <main class="portal-content">
                 <div class="portal-heading">
@@ -49,33 +50,33 @@
                     <div class="portal-panel__heading">
                         <div>
                             <h2>Thông tin vị trí</h2>
-                            <p>Tin mới sẽ ở trạng thái chờ kiểm duyệt trong bản demo.</p>
+                            <p>Tin mới sẽ được gửi quản trị viên kiểm duyệt trước khi công khai.</p>
                         </div>
                     </div>
-                    <form>
+                    <form id="post-job-form">
                         <div class="portal-grid-2">
                             <div class="field"><label for="job-title">Tên vị trí</label><input id="job-title"
-                                    placeholder="Ví dụ: Backend Developer Intern"></div>
+                                    maxlength="150" minlength="3" required placeholder="Ví dụ: Backend Developer Intern"></div>
                             <div class="field"><label for="job-type">Loại hình công việc</label><select id="job-type">
-                                    <option>Thực tập</option>
-                                    <option>Bán thời gian</option>
-                                    <option>Toàn thời gian</option>
+                                    <option value="INTERNSHIP">Thực tập</option>
+                                    <option value="PART_TIME">Bán thời gian</option>
+                                    <option value="FULL_TIME">Toàn thời gian</option>
                                 </select></div>
                             <div class="field"><label for="job-location">Địa điểm</label><input id="job-location"
                                     placeholder="TP. Hồ Chí Minh / Hà Nội"></div>
                             <div class="field"><label for="job-salary">Mức lương</label><input id="job-salary"
                                     placeholder="3–5 triệu/tháng hoặc thỏa thuận"></div>
                             <div class="field"><label for="job-deadline">Hạn ứng tuyển</label><input id="job-deadline"
-                                    type="date"></div>
+                                    type="date" required></div>
                             <div class="field"><label for="job-experience">Kinh nghiệm</label><input id="job-experience"
                                     placeholder="Không yêu cầu"></div>
                         </div>
                         <div class="field"><label for="job-description">Mô tả công việc</label><textarea
-                                id="job-description" rows="5"></textarea></div>
+                                id="job-description" rows="5" minlength="5" required></textarea></div>
                         <div class="field"><label for="job-requirements">Yêu cầu ứng viên</label><textarea
-                                id="job-requirements" rows="5"></textarea></div>
-                        <div class="portal-quick-actions"><button class="btn" type="button" disabled>Gửi
-                                duyệt</button><a class="btn btn-outline" href="manage-jobs.html">Hủy</a></div>
+                                id="job-requirements" rows="5" minlength="5" required></textarea></div>
+                        <div class="portal-quick-actions"><button class="btn" type="submit">Gửi duyệt</button><a class="btn btn-outline" href="manage-jobs.html">Hủy</a></div>
+                        <p id="job-form-status" role="status" aria-live="polite"></p>
                     </form>
                 </section>
             </main>

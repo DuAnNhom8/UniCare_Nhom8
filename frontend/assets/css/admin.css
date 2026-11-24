@@ -1,4 +1,119 @@
 /* Trang quản trị – mở rộng trên style.css. */
+.portal-table .status {
+    min-height: 28px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    font-size: 11px;
+    font-weight: 750
+}
+
+.portal-table .status::before {
+    width: 7px;
+    height: 7px
+}
+
+.portal-table .status--success,
+.portal-table .status--accepted {
+    border-color: #bde8d1
+}
+
+.portal-table .status--reviewing {
+    border-color: #d1ddfb
+}
+
+.portal-table .status--received {
+    border-color: #dce4ee
+}
+
+.portal-table .status--rejected {
+    border-color: #f0cbd1
+}
+
+.portal-table .status--warning {
+    border-color: #f3dfb5
+}
+
+.portal-tabs {
+    gap: 8px;
+    border-bottom: 0
+}
+
+.portal-tabs button {
+    padding: 8px 13px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: white;
+    font-size: 12px;
+    transition: color .18s ease, background .18s ease, border-color .18s ease
+}
+
+.portal-tabs button:hover {
+    color: var(--blue);
+    border-color: #cbd9f5;
+    background: #f7f9ff
+}
+
+.portal-tabs button[aria-selected="true"] {
+    color: #2456b4;
+    border-color: #c9d8fa;
+    background: #edf3ff;
+    box-shadow: inset 0 0 0 1px #dce6ff
+}
+
+.portal-tabs button:focus-visible {
+    outline: 2px solid #6f91e8;
+    outline-offset: 2px
+}
+
+.admin-job-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px
+}
+
+.admin-job-action {
+    min-height: 34px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: none
+}
+
+.admin-job-action--approve {
+    border-color: #16805b;
+    background: #16805b;
+    color: #fff
+}
+
+.admin-job-action--approve:hover:not(:disabled) {
+    border-color: #116b4d;
+    background: #116b4d;
+    transform: none;
+    box-shadow: none
+}
+
+.admin-job-action--reject {
+    border-color: #efc6cc;
+    background: #fff;
+    color: #b73546
+}
+
+.admin-job-action--reject:hover:not(:disabled) {
+    border-color: #e8aab4;
+    background: #fff1f2;
+    color: #a52e3e;
+    transform: none;
+    box-shadow: none
+}
+
+.admin-job-action:focus-visible {
+    outline: 2px solid #6f91e8;
+    outline-offset: 2px
+}
+
 .admin-activity {
     display: flex;
     gap: 10px;

@@ -8,7 +8,10 @@
     <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/company.css">
+    <link rel="stylesheet" href="../../assets/css/candidate.css">
+    <script src="../../assets/js/api.js" defer></script>
     <script src="../../assets/js/site-ui.js" defer></script>
+    <script src="../../assets/js/ai-matching.js" defer></script>
 </head>
 
 <body>
@@ -19,20 +22,21 @@
             <nav class="portal-menu"><a href="index.html"><span class="nav-emoji">⌕</span><span>Tìm việc
                         làm</span></a><a href="my-applications.html"><span class="nav-emoji">▤</span><span>Đơn ứng
                         tuyển</span></a><a href="cv-manage.html"><span class="nav-emoji">▥</span><span>Hồ sơ /
-                        CV</span></a><a href="ai-matching.html" aria-current="page"><span
-                        class="nav-emoji">✧</span><span>Phân tích CV</span></a>
+                                CV</span></a><a href="profile.html"><span class="nav-emoji">♙</span><span>Hồ sơ cá nhân</span></a>
+                        <a href="ai-matching.html" data-candidate-page="ai" aria-current="page"><span
+                                class="nav-emoji">✧</span><span>Phân tích CV</span></a>
                 <div class="portal-menu-spacer"></div><a href="../../index.html"><span
                         class="nav-emoji">↗</span><span>Về trang chủ</span></a>
             </nav>
             <div class="portal-sidebottom"><span class="portal-avatar">NA</span>
-                <div><strong>Nguyễn Minh Anh</strong><small>Sinh viên · Demo</small></div>
+                <div><strong>Ứng viên</strong><small>Sinh viên</small></div>
             </div>
         </aside>
         <div class="portal-main">
             <header class="portal-topbar">
                 <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
                             class="brand-mark">U</span>UniCareer</a><span>Candidate Workspace</span></div>
-                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
+                <div class="portal-topbar-right"><span class="portal-demo">ĐỐI CHIẾU CV</span><a
                         class="portal-topbar__link" href="index.html">Khám phá việc làm ↗</a></div>
             </header>
             <main class="portal-content">
@@ -43,46 +47,36 @@
                         <p>Tham khảo mức độ phù hợp giữa kỹ năng trong CV và yêu cầu công việc.</p>
                     </div>
                 </div>
-                <div class="company-warning"><strong>Chế độ thử nghiệm:</strong> Đây là giao diện minh họa, không phải
-                    đánh giá AI thực tế và không quyết định tuyển dụng.</div>
+                <div class="company-warning"><strong>Quyền riêng tư:</strong> CV và mô tả công việc được gửi đến Gemini
+                    để phân tích chỉ khi bạn đồng ý. Kết quả chỉ mang tính tham khảo, không phải quyết định tuyển dụng.</div>
                 <section class="portal-panel company-ai-form-panel">
                     <div class="portal-panel__heading">
                         <div>
                             <h2>So sánh hồ sơ với vị trí việc làm</h2>
-                            <p>Chọn công việc và nhập kỹ năng để xem ví dụ đối chiếu.</p>
+                            <p>Chọn CV đã nhập hoặc tải lên và công việc đang tuyển để nhận phân tích kỹ năng.</p>
                         </div><a class="btn btn-outline" href="cv-manage.html">Chỉnh sửa CV</a>
                     </div>
-                    <form>
-                        <div class="field"><label for="ai-job">Tin tuyển dụng</label><select id="ai-job">
-                                <option>Backend Developer Intern · TechNova</option>
-                                <option>Frontend Developer Intern · BluePeak</option>
-                                <option>Data Analyst Intern · NextStep</option>
+                    <form id="candidate-ai-form">
+                        <div class="field"><label for="ai-job">Tin tuyển dụng</label><select id="ai-job" required>
+                                <option value="">Đang tải việc làm...</option>
                             </select></div>
-                        <div class="field"><label for="cv-skills">Kỹ năng trong CV</label><textarea id="cv-skills"
-                                rows="5">Python, FastAPI, MySQL, Git, REST API</textarea></div><button class="btn"
-                            type="button" disabled>✧ Phân tích mức độ phù hợp</button>
+                        <div class="field"><label for="ai-cv">CV đã lưu</label><select id="ai-cv" required>
+                                <option value="">Đang tải CV...</option>
+                            </select></div>
+                        <label class="checkline"><input id="ai-consent" type="checkbox" required><span>Tôi đồng ý gửi
+                                nội dung CV đã chọn đến Gemini để phân tích.</span></label>
+                        <button class="btn" id="ai-analyze" type="submit" disabled>✧ Phân tích mức độ phù hợp</button>
+                        <p id="ai-status" role="status" aria-live="polite"></p>
                     </form>
                 </section>
                 <section class="portal-panel company-results">
                     <div class="portal-panel__heading">
                         <div>
-                            <h2>Kết quả minh họa</h2>
-                            <p>So sánh nội dung hồ sơ với yêu cầu tuyển dụng.</p>
+                            <h2>Kết quả phân tích</h2>
+                            <p>Đối chiếu kỹ năng, kinh nghiệm và yêu cầu công việc.</p>
                         </div>
                     </div>
-                    <div class="company-match">
-                        <div class="company-score"><strong>82%</strong><small>Mức độ trùng khớp tham khảo</small><span
-                                class="meter"><i class="match-meter-fill-82"></i></span></div>
-                        <div class="company-match__skills">
-                            <h3>Kỹ năng phù hợp</h3>
-                            <div class="company-skills"><span class="company-skill">Python</span><span
-                                    class="company-skill">FastAPI</span><span class="company-skill">MySQL</span></div>
-                            <h3>Có thể bổ sung</h3>
-                            <div class="company-skills"><span class="company-skill">Docker</span><span
-                                    class="company-skill">Testing</span></div>
-                        </div>
-                    </div>
-                    <p class="portal-help">Điểm số chỉ mang tính tham khảo và được dựng sẵn cho giao diện demo.</p>
+                    <div id="ai-result" aria-live="polite">Chưa có kết quả. Chọn CV và công việc để bắt đầu.</div>
                 </section>
             </main>
         </div>

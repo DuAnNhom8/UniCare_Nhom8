@@ -8,7 +8,9 @@
     <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/company.css">
+    <script src="../../assets/js/api.js" defer></script>
     <script src="../../assets/js/site-ui.js" defer></script>
+    <script src="../../assets/js/company.js" defer></script>
 </head>
 
 <body>
@@ -26,16 +28,15 @@
                 <div class="portal-menu-spacer"></div><a href="../../index.html"><span
                         class="nav-emoji">↗</span><span>Về trang chủ</span></a>
             </nav>
-            <div class="portal-sidebottom"><span class="portal-avatar">TN</span>
-                <div><strong>TechNova</strong><small>Nhà tuyển dụng · Demo</small></div>
+            <div class="portal-sidebottom"><span class="portal-avatar">DN</span>
+                <div><strong>Doanh nghiệp</strong><small>Nhà tuyển dụng</small></div>
             </div>
         </aside>
         <div class="portal-main">
             <header class="portal-topbar">
                 <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
                             class="brand-mark">U</span>UniCareer</a><span>Employer Workspace</span></div>
-                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
-                        class="portal-topbar__link" href="dashboard.html">Tổng quan ↗</a></div>
+                <div class="portal-topbar-right"><a class="portal-topbar__link" href="dashboard.html">Tổng quan ↗</a></div>
             </header>
             <main class="portal-content">
                 <div class="portal-heading">
@@ -53,39 +54,40 @@
                                 <p>Thông tin giới thiệu và liên hệ.</p>
                             </div>
                         </div>
-                        <form>
+                        <form id="company-form">
                             <div class="field"><label for="company-name">Tên doanh nghiệp</label><input
-                                    id="company-name" value="TechNova"></div>
+                                    id="company-name" maxlength="150" required></div>
                             <div class="field"><label for="company-industry">Lĩnh vực</label><input
-                                    id="company-industry" value="Công nghệ thông tin / Phần mềm"></div>
+                                    id="company-industry"></div>
                             <div class="field"><label for="company-website">Website</label><input id="company-website"
-                                    type="url" value="https://technova.example"></div>
+                                    type="url"></div>
                             <div class="field"><label for="company-description">Giới thiệu</label><textarea
                                     id="company-description"
-                                    rows="6">TechNova phát triển các giải pháp phần mềm và sản phẩm số cho doanh nghiệp.</textarea>
-                            </div><button class="btn" type="button" disabled>Lưu thông tin (bản demo)</button>
+                                    rows="6"></textarea>
+                            </div><button class="btn" type="submit">Lưu thông tin</button>
+                            <p id="company-status" role="status" aria-live="polite"></p>
                         </form>
                     </section>
                     <aside class="portal-panel">
-                        <div class="company-profile"><span class="portal-avatar">TN</span>
+                        <div class="company-profile"><span class="portal-avatar">DN</span>
                             <div>
-                                <h3>TechNova</h3>
-                                <p>Doanh nghiệp công nghệ</p>
+                                <h3>Chưa cập nhật doanh nghiệp</h3>
+                                <p>Thông tin sẽ hiển thị sau khi được lưu.</p>
                             </div>
                         </div>
                         <div class="portal-divider"></div>
-                        <p>Doanh nghiệp công nghệ tập trung phát triển sản phẩm web và giải pháp dữ liệu.</p>
+                        <p>Hãy hoàn thiện hồ sơ doanh nghiệp để giới thiệu công ty với ứng viên.</p>
                         <div class="portal-stats">
                             <div class="portal-stat">
                                 <div class="portal-stat__label">Tin tuyển dụng</div>
-                                <div class="portal-stat__value">04</div>
+                                <div class="portal-stat__value">—</div>
                             </div>
                             <div class="portal-stat">
                                 <div class="portal-stat__label">Hồ sơ nhận được</div>
-                                <div class="portal-stat__value">12</div>
+                                <div class="portal-stat__value">—</div>
                             </div>
                         </div>
-                        <p class="portal-help">Thông tin hiển thị là nội dung mẫu.</p>
+                        <p class="portal-help">Thông tin được lấy từ hồ sơ doanh nghiệp đã lưu.</p>
                     </aside>
                 </div>
             </main>

@@ -696,6 +696,11 @@
     gap: 22px
 }
 
+.cv-layout.cv-manager-layout {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 900px;
+}
+
 .cv-layout .card {
     padding: 25px
 }
@@ -993,5 +998,606 @@
 
     .screen-heading h1 {
         font-size: 25px
+    }
+}
+
+body.candidate-workspace {
+    background: var(--bg)
+}
+
+body.candidate-workspace main.candidate-workspace-content {
+    width: 100%;
+    max-width: 1540px;
+    margin-inline: auto;
+    padding: 33px clamp(20px, 3vw, 44px) 72px
+}
+
+body.candidate-workspace .candidate-workspace-content>.container {
+    width: 100%;
+    max-width: none
+}
+
+body.candidate-workspace .crumbs {
+    display: none
+}
+
+body.candidate-workspace .history-header {
+    margin-bottom: 27px
+}
+
+body.candidate-workspace .screen-heading h1 {
+    font-size: clamp(25px, 2.3vw, 33px);
+    letter-spacing: -.04em
+}
+
+body.candidate-workspace .hero {
+    padding: 0;
+    margin-bottom: 28px;
+    overflow: visible;
+    color: var(--ink);
+    background: transparent
+}
+
+body.candidate-workspace .hero:after {
+    display: none
+}
+
+body.candidate-workspace .hero .container {
+    width: 100%;
+    max-width: none
+}
+
+body.candidate-workspace .hero .eyebrow {
+    color: var(--blue);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: .14em
+}
+
+body.candidate-workspace .hero h1 {
+    max-width: none;
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: clamp(25px, 2.3vw, 33px);
+    letter-spacing: -.04em
+}
+
+body.candidate-workspace .hero h1 span {
+    color: var(--blue)
+}
+
+body.candidate-workspace .hero p {
+    max-width: 700px;
+    margin-bottom: 18px;
+    color: var(--muted);
+    font-size: 14px
+}
+
+body.candidate-workspace .hero-search {
+    max-width: none;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    box-shadow: var(--shadow)
+}
+
+body.candidate-workspace .hero-stats {
+    display: none
+}
+
+body.candidate-workspace .jobs-area {
+    padding: 0
+}
+
+body.candidate-workspace .jobs-title {
+    margin-bottom: 18px
+}
+
+body.candidate-workspace .filters,
+body.candidate-workspace .job-card,
+body.candidate-workspace .application-card,
+body.candidate-workspace .cv-layout>.card,
+body.candidate-workspace .form-card,
+body.candidate-workspace .detail-header,
+body.candidate-workspace .detail-content,
+body.candidate-workspace .detail-sidebar>.card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow)
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: minmax(230px, 300px) minmax(0, 1fr);
+    gap: 20px;
+    align-items: start
+}
+
+.profile-layout>.card,
+.cv-workspace>.card {
+    padding: 26px
+}
+
+.profile-summary-card {
+    grid-row: span 2;
+    text-align: center
+}
+
+.profile-summary-card h2 {
+    margin: 15px 0 5px;
+    font-size: 19px
+}
+
+.profile-summary-card .helper {
+    margin-top: 20px
+}
+
+.profile-avatar {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    margin: 5px auto 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #e7efff;
+    color: #2f5fb5;
+    font-size: 28px;
+    font-weight: 850
+}
+
+.profile-avatar img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.profile-summary-card .status {
+    margin-top: 9px
+}
+
+.profile-form-card h2,
+.profile-security-card h2,
+.cv-create-card h2,
+.cv-upload-card h2 {
+    margin: 0 0 7px;
+    font-size: 20px
+}
+
+.section-intro,
+.cv-create-heading p {
+    margin: 0 0 19px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.65
+}
+
+.profile-fields,
+.cv-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 16px
+}
+
+.profile-field-wide {
+    grid-column: 1 / -1
+}
+
+.profile-security-card .profile-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
+.profile-security-card .profile-fields .profile-field-wide {
+    grid-column: 1 / -1
+}
+
+.profile-layout .field,
+.cv-editor-panel .field {
+    margin: 0 0 16px
+}
+
+.profile-layout input,
+.profile-layout select,
+.cv-editor-panel input,
+.cv-editor-panel textarea {
+    width: 100%
+}
+
+.cv-workspace {
+    display: grid;
+    gap: 20px
+}
+
+.cv-create-heading,
+.cv-editor-heading,
+.cv-list-heading,
+.cv-upload-form,
+.cv-editor-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px
+}
+
+.cv-create-heading {
+    align-items: flex-start
+}
+
+.cv-create-heading .eyebrow,
+.cv-upload-card .eyebrow,
+.cv-list-heading .eyebrow {
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .13em
+}
+
+.cv-create-heading p {
+    margin-bottom: 0
+}
+
+.cv-upload-card > div p {
+    margin: 0 0 18px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.65
+}
+
+.cv-upload-form .field {
+    flex: 1;
+    min-width: 0;
+    margin: 0
+}
+
+.cv-upload-form input[type="file"] {
+    width: 100%;
+    min-height: 44px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff
+}
+
+.cv-upload-form small {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 12px
+}
+
+.cv-upload-status {
+    margin: 14px 0 0;
+    color: var(--success);
+    font-size: 13px
+}
+
+.cv-upload-status:empty {
+    display: none
+}
+
+.cv-upload-status.is-error {
+    color: var(--danger)
+}
+
+.cv-editor-panel {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line)
+}
+
+.cv-editor-panel[hidden] {
+    display: none
+}
+
+.cv-editor-heading {
+    margin-bottom: 19px;
+    align-items: flex-start
+}
+
+.cv-editor-heading h3 {
+    margin: 0 0 4px
+}
+
+.cv-editor-heading p {
+    margin: 0;
+    font-size: 13px
+}
+
+.cv-fieldset {
+    min-width: 0;
+    margin: 20px 0;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 13px
+}
+
+.cv-fieldset legend {
+    padding: 0 8px;
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 750
+}
+
+.cv-editor-actions {
+    justify-content: flex-start
+}
+
+.cv-list-section {
+    margin-top: 4px
+}
+
+.cv-list-heading {
+    margin-bottom: 14px
+}
+
+.cv-list-heading h2 {
+    margin: 3px 0 0;
+    font-size: 21px
+}
+
+.cv-count,
+.cv-type-label {
+    color: var(--muted);
+    font-size: 12px
+}
+
+.cv-list-grid {
+    display: grid;
+    gap: 12px
+}
+
+.cv-file-row {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    padding: 17px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: var(--shadow)
+}
+
+.cv-file-info {
+    display: grid;
+    gap: 4px;
+    min-width: 0
+}
+
+.cv-file-info strong {
+    overflow-wrap: anywhere;
+    color: var(--navy)
+}
+
+.cv-file-info p {
+    margin: 3px 0 0;
+    font-size: 12px
+}
+
+.cv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 7px
+}
+
+.cv-actions .btn {
+    padding: 8px 11px;
+    font-size: 12px
+}
+
+.cv-consent {
+    grid-column: 2 / -1;
+    margin: 0
+}
+
+.cv-empty {
+    padding: 25px;
+    border: 1px dashed var(--line);
+    border-radius: 13px;
+    background: #fff;
+    color: var(--muted);
+    text-align: center;
+    font-size: 14px
+}
+
+.cv-preview-dialog {
+    width: min(850px, calc(100vw - 32px));
+    max-width: none;
+    max-height: calc(100vh - 32px);
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 25px 80px #10264840
+}
+
+.cv-preview-dialog::backdrop {
+    background: #10264899
+}
+
+.cv-preview-toolbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+    background: #fff
+}
+
+.cv-preview-content {
+    max-width: 760px;
+    margin: 30px auto;
+    padding: 0 32px 32px;
+    color: #203047;
+    line-height: 1.7
+}
+
+.cv-preview-content h1 {
+    margin: 0 0 4px;
+    color: var(--navy)
+}
+
+.cv-preview-content h2 {
+    margin: 24px 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+    color: var(--blue);
+    font-size: 17px
+}
+
+.cv-preview-content p {
+    white-space: pre-line
+}
+
+.cv-preview-contact {
+    margin: 0
+}
+
+.cv-preview-content a {
+    margin-right: 12px
+}
+
+@media(max-width:850px) {
+    .profile-layout {
+        grid-template-columns: minmax(0, 1fr)
+    }
+
+    .profile-summary-card {
+        grid-row: auto
+    }
+
+}
+
+@media(max-width:650px) {
+    .profile-fields,
+    .profile-security-card .profile-fields,
+    .cv-content-grid {
+        grid-template-columns: minmax(0, 1fr)
+    }
+
+    .profile-field-wide,
+    .profile-security-card .profile-fields .profile-field-wide {
+        grid-column: auto
+    }
+
+    .cv-create-heading {
+        align-items: stretch;
+        flex-direction: column
+    }
+
+    .cv-create-heading .btn {
+        width: 100%
+    }
+
+    .cv-upload-form {
+        align-items: stretch;
+        flex-direction: column
+    }
+
+    .cv-upload-form .btn {
+        align-self: flex-start
+    }
+
+    .cv-file-row {
+        grid-template-columns: 44px minmax(0, 1fr)
+    }
+
+    .cv-file-row .company-logo {
+        width: 44px;
+        height: 44px
+    }
+
+    .cv-actions,
+    .cv-consent {
+        grid-column: 1 / -1
+    }
+
+    .cv-actions {
+        justify-content: flex-start
+    }
+
+    .cv-editor-heading {
+        align-items: flex-start
+    }
+
+    .cv-preview-toolbar {
+        flex-direction: column
+    }
+
+    .cv-preview-content {
+        margin-top: 20px;
+        padding-inline: 20px
+    }
+}
+
+@media print {
+    body.cv-printing * {
+        visibility: hidden !important
+    }
+
+    body.cv-printing #cv-preview,
+    body.cv-printing #cv-preview * {
+        visibility: visible !important
+    }
+
+    body.cv-printing #cv-preview {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        max-width: none;
+        max-height: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none
+    }
+
+    body.cv-printing .cv-preview-toolbar {
+        display: none
+    }
+
+    body.cv-printing .cv-preview-content {
+        margin: 0 auto;
+        padding: 0
+    }
+}
+
+@media(max-width:830px) {
+    body.candidate-workspace main.candidate-workspace-content {
+        padding: 24px 16px 50px
+    }
+}
+
+@media(max-width:580px) {
+    body.candidate-workspace .portal-topbar {
+        gap: 8px;
+        padding-inline: 12px
+    }
+
+    body.candidate-workspace .portal-topbar-left,
+    body.candidate-workspace .portal-topbar-right {
+        gap: 8px
+    }
+
+    body.candidate-workspace .portal-topbar-left .brand {
+        gap: 6px;
+        font-size: 17px
+    }
+
+    body.candidate-workspace .portal-topbar-left .brand-mark {
+        width: 34px;
+        height: 34px
+    }
+
+    body.candidate-workspace .portal-demo {
+        display: none
+    }
+
+    body.candidate-workspace .candidate-session-action {
+        padding-inline: 10px;
+        white-space: nowrap
     }
 }

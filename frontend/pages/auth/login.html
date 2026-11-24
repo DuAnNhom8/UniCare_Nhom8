@@ -9,7 +9,9 @@
   <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/auth.css">
+  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/auth.js" defer></script>
 </head>
 
 <body>
@@ -29,16 +31,16 @@
         <div class="eyebrow">CHÀO MỪNG TRỞ LẠI</div>
         <h1>Đăng nhập UniCareer</h1>
         <p>Đăng nhập để tiếp tục. Sau khi xác thực, hệ thống sẽ mở khu vực phù hợp với vai trò tài khoản của bạn.</p>
-        <form action="#" method="get">
+        <form id="login-form">
           <div class="field"><label for="email">Email</label><input id="email" name="email" type="email"
               placeholder="name@example.com" autocomplete="email" required></div>
           <div class="field"><label for="password">Mật khẩu</label><input id="password" name="password" type="password"
               placeholder="Nhập mật khẩu" autocomplete="current-password" required></div>
-          <p class="auth-forgot-link"><a href="forgot-password.html">Quên mật khẩu?</a></p><button
-            class="btn btn-lg btn-full" type="button" disabled>Đăng nhập</button>
+          <button class="btn btn-lg btn-full" type="submit">Đăng nhập</button>
+          <p id="login-status" role="status" aria-live="polite"></p>
         </form>
         <p class="auth-account-prompt">Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
-        <p class="muted">Bản demo chưa kết nối xác thực. Vai trò được gán cho tài khoản khi đăng ký; Admin không chọn vai trò tại màn hình đăng nhập công khai.</p>
+        <p class="muted">Đăng nhập bằng tài khoản UniCareer. Vai trò được gán khi đăng ký; tài khoản quản trị do hệ thống cấp.</p>
       </section>
     </div>
   </main>

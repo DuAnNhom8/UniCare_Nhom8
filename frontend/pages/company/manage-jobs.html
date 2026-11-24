@@ -7,8 +7,10 @@
     <title>Tin tuyển dụng | UniCareer</title>
     <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/company.css">
+    <link rel="stylesheet" href="../../assets/css/company.css?v=job-actions-v2">
+    <script src="../../assets/js/api.js" defer></script>
     <script src="../../assets/js/site-ui.js" defer></script>
+    <script src="../../assets/js/company.js?v=job-actions-v2" defer></script>
 </head>
 
 <body>
@@ -26,16 +28,15 @@
                 <div class="portal-menu-spacer"></div><a href="../../index.html"><span
                         class="nav-emoji">↗</span><span>Về trang chủ</span></a>
             </nav>
-            <div class="portal-sidebottom"><span class="portal-avatar">TN</span>
-                <div><strong>TechNova</strong><small>Nhà tuyển dụng · Demo</small></div>
+            <div class="portal-sidebottom"><span class="portal-avatar">DN</span>
+                <div><strong>Doanh nghiệp</strong><small>Nhà tuyển dụng</small></div>
             </div>
         </aside>
         <div class="portal-main">
             <header class="portal-topbar">
                 <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
                             class="brand-mark">U</span>UniCareer</a><span>Employer Workspace</span></div>
-                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
-                        class="portal-topbar__link" href="post-job.html">＋ Đăng tin mới</a></div>
+                <div class="portal-topbar-right"><a class="portal-topbar__link" href="post-job.html">＋ Đăng tin mới</a></div>
             </header>
             <main class="portal-content">
                 <div class="portal-heading">
@@ -49,8 +50,8 @@
                     <div class="portal-panel__heading">
                         <div>
                             <h2>Danh sách tin đăng</h2>
-                            <p>Các tin tuyển dụng của TechNova.</p>
-                        </div><span class="portal-pill portal-pill--info">4 tin</span>
+                            <p>Các tin tuyển dụng thuộc doanh nghiệp của bạn.</p>
+                        </div><span class="portal-pill portal-pill--info">Đang tải...</span>
                     </div>
                     <div class="portal-table-wrap">
                         <table class="portal-table">
@@ -65,40 +66,14 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Backend Developer Intern</strong><small>TP. Hồ Chí Minh · Thực
-                                            tập</small></td>
-                                    <td>05/11/2026</td>
-                                    <td>05 hồ sơ</td>
-                                    <td><span class="status status--success">Đang tuyển</span></td>
-                                    <td><a class="btn btn-outline btn-sm" href="edit-job.html?job=backend">Chỉnh sửa</a></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Frontend Developer Intern</strong><small>Hybrid · Thực tập</small></td>
-                                    <td>02/11/2026</td>
-                                    <td>03 hồ sơ</td>
-                                    <td><span class="status status--success">Đang tuyển</span></td>
-                                    <td><a class="btn btn-outline btn-sm" href="edit-job.html?job=frontend">Chỉnh sửa</a></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Data Analyst Intern</strong><small>Hà Nội · Thực tập</small></td>
-                                    <td>28/10/2026</td>
-                                    <td>02 hồ sơ</td>
-                                    <td><span class="status status--success">Đang tuyển</span></td>
-                                    <td><a class="btn btn-outline btn-sm" href="edit-job.html?job=data">Chỉnh sửa</a></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Business Analyst Intern</strong><small>TP. Hồ Chí Minh · Thực
-                                            tập</small></td>
-                                    <td>24/10/2026</td>
-                                    <td>02 hồ sơ</td>
-                                    <td><span class="status status--success">Đang tuyển</span></td>
-                                    <td><a class="btn btn-outline btn-sm" href="edit-job.html?job=business">Chỉnh sửa</a></td>
+                                    <td colspan="5">Đang tải tin tuyển dụng...</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <nav id="company-jobs-pagination" class="portal-pagination" aria-label="Phân trang tin tuyển dụng" hidden></nav>
                 </section>
-                <p class="portal-help">Trạng thái và số liệu minh họa, chưa kết nối API tuyển dụng.</p>
+                <p class="portal-help">Quản lý tin tuyển dụng và trạng thái kiểm duyệt.</p>
             </main>
         </div>
     </div>

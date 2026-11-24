@@ -2,77 +2,137 @@
 <html lang="vi">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hồ sơ cá nhân | UniCareer</title>
-    <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/candidate.css">
-    <script src="../../assets/js/site-ui.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quản lý thông tin tài khoản và hồ sơ cá nhân trên UniCareer.">
+  <title>Hồ sơ cá nhân | UniCareer</title>
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/candidate.css">
+  <script src="../../assets/js/api.js" defer></script>
+  <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/candidate.js" defer></script>
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container nav-wrap"><a class="brand" href="../../index.html"><span
-                    class="brand-mark">U</span>UniCareer</a>
-            <nav class="nav-main"><a href="index.html">Việc làm</a><a href="my-applications.html">Đơn ứng tuyển</a><a
-                    class="is-active" href="profile.html" aria-current="page">Hồ sơ cá nhân</a><a href="cv-manage.html">Hồ sơ & CV</a></nav>
-            <div class="nav-side"><span class="demo-label">DEMO · ỨNG VIÊN</span><a class="btn btn-outline"
-                    href="../auth/login.html">Đăng nhập</a></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../../index.html"><span class="brand-mark">U</span>UniCareer</a>
+      <nav class="nav-main" aria-label="Điều hướng ứng viên">
+        <a href="index.html">Việc làm</a>
+        <a href="my-applications.html">Đơn ứng tuyển</a>
+        <a class="is-active" href="profile.html" aria-current="page">Hồ sơ cá nhân</a>
+        <a href="cv-manage.html">Hồ sơ CV</a>
+      </nav>
+      <div class="nav-side">
+        <span class="demo-label">KHÔNG GIAN ỨNG VIÊN</span>
+        <a class="btn btn-outline" href="../auth/login.html">Đăng nhập</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <nav class="crumbs" aria-label="Đường dẫn">
+        <a href="index.html">Việc làm</a><span>/</span><span class="current">Hồ sơ cá nhân</span>
+      </nav>
+      <div class="history-header">
+        <div class="screen-heading">
+          <h1>Hồ sơ cá nhân</h1>
+          <p>Quản lý thông tin tài khoản và cách nhà tuyển dụng liên hệ với bạn.</p>
         </div>
-    </header>
-    <main class="page">
-        <div class="container">
-            <nav class="crumbs"><a href="index.html">Việc làm</a><span>/</span><span class="current">Hồ sơ cá
-                    nhân</span></nav>
-            <div class="history-header">
-                <div class="screen-heading">
-                    <h1>Hồ sơ cá nhân</h1>
-                    <p>Thông tin mẫu hồ sơ ứng viên UniCareer.</p>
-                </div><a class="btn btn-outline" href="cv-manage.html">Quản lý CV</a>
+        <a class="btn btn-outline" href="cv-manage.html">Đi đến Hồ sơ CV</a>
+      </div>
+
+      <div class="profile-layout">
+        <section class="card profile-summary-card" aria-label="Tóm tắt tài khoản">
+          <div class="profile-avatar">
+            <img id="candidate-avatar-image" alt="Ảnh đại diện" hidden>
+            <span id="candidate-avatar">U</span>
+          </div>
+          <h2 id="candidate-display-name">Ứng viên</h2>
+          <p id="candidate-display-email" class="muted">Chưa cập nhật email</p>
+          <span id="candidate-display-status" class="status status-active">Đang tìm việc</span>
+          <p class="helper">Thông tin chuyên môn và các phiên bản CV được quản lý riêng trong Hồ sơ CV.</p>
+        </section>
+
+        <section class="card profile-form-card">
+          <h2>Thông tin tài khoản</h2>
+          <p class="section-intro">Email là tên đăng nhập. Các thay đổi tại đây không làm thay đổi nội dung những CV đã lưu.</p>
+          <form id="profile-form">
+            <div class="profile-fields">
+              <div class="field">
+                <label for="profile-name">Họ và tên</label>
+                <input id="profile-name" maxlength="255" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="profile-email">Email đăng nhập</label>
+                <input id="profile-email" type="email" maxlength="255" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="profile-phone">Số điện thoại</label>
+                <input id="profile-phone" type="tel" maxlength="20" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="profile-status-select">Trạng thái tìm việc</label>
+                <select id="profile-status-select">
+                  <option value="OPEN">Đang tìm việc</option>
+                  <option value="INTERNSHIP">Ưu tiên thực tập</option>
+                  <option value="NOT_LOOKING">Chưa có nhu cầu</option>
+                </select>
+              </div>
+              <div class="field profile-field-wide">
+                <label for="profile-avatar-url">Ảnh đại diện (đường dẫn ảnh)</label>
+                <input id="profile-avatar-url" type="url" maxlength="500" placeholder="https://example.com/avatar.jpg">
+              </div>
+              <div class="field">
+                <label for="profile-github">GitHub</label>
+                <input id="profile-github" type="url" maxlength="500" placeholder="https://github.com/ten-cua-ban">
+              </div>
+              <div class="field">
+                <label for="profile-linkedin">LinkedIn</label>
+                <input id="profile-linkedin" type="url" maxlength="500" placeholder="https://linkedin.com/in/ten-cua-ban">
+              </div>
             </div>
-            <div class="cv-layout">
-                <section class="card">
-                    <div class="mini-profile">
-                        <div class="company-logo">NA</div>
-                        <h3>Nguyễn Minh Anh</h3>
-                        <p>Backend Developer Intern</p>
-                        <p>Đại học Công nghệ · Công nghệ thông tin</p>
-                        <p><strong>Kỹ năng:</strong> Python, FastAPI, MySQL</p>
-                    </div>
-                    <p class="company-demo-note">Hồ sơ này chỉ dùng minh họa giao diện.</p>
-                </section>
-                <section class="card">
-                    <h2>Thông tin hồ sơ</h2>
-                    <form action="#" method="get">
-                        <div class="field"><label for="profile-name">Họ và tên</label><input id="profile-name"
-                                value="Nguyễn Minh Anh"></div>
-                        <div class="field"><label for="profile-phone">Số điện thoại</label><input id="profile-phone"
-                                type="tel" value="0901 234 567"></div>
-                        <div class="field"><label for="profile-email">Email</label><input id="profile-email"
-                                type="email" value="minhanh@example.com"></div>
-                        <div class="field"><label for="profile-school">Trường học</label><input id="profile-school"
-                                value="Đại học Công nghệ"></div>
-                        <div class="field"><label for="profile-major">Chuyên ngành</label><input id="profile-major"
-                                value="Công nghệ thông tin"></div>
-                        <div class="field"><label for="profile-skills">Kỹ năng</label><input id="profile-skills"
-                                value="Python, FastAPI, MySQL"></div>
-                        <div class="field"><label for="profile-intro">Giới thiệu</label><textarea id="profile-intro"
-                                rows="5">Sinh viên yêu thích lập trình web và mong muốn phát triển trong lĩnh vực backend.</textarea>
-                        </div><button class="btn" type="button" disabled>Lưu thay đổi (bản demo)</button>
-                    </form>
-                </section>
+            <button class="btn" type="submit">Lưu thông tin</button>
+            <p id="profile-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="card profile-security-card">
+          <h2>Bảo mật</h2>
+          <p class="section-intro">Dùng mật khẩu hiện tại để xác nhận khi đổi mật khẩu.</p>
+          <form id="password-form" class="profile-fields">
+            <div class="field">
+              <label for="profile-current-password">Mật khẩu hiện tại</label>
+              <input id="profile-current-password" type="password" autocomplete="current-password" required>
             </div>
-        </div>
-    </main>
-    <footer class="site-footer">
-        <div class="container footer-layout">
-            <div><strong>UniCareer</strong>
-                <p>Giao diện hồ sơ mẫu.</p>
+            <div class="field">
+              <label for="profile-new-password">Mật khẩu mới</label>
+              <input id="profile-new-password" type="password" minlength="8" maxlength="128"
+                autocomplete="new-password" required>
             </div>
-            <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="index.html">Tìm việc</a></div>
-        </div>
-    </footer>
+            <div class="field">
+              <label for="profile-confirm-password">Nhập lại mật khẩu mới</label>
+              <input id="profile-confirm-password" type="password" minlength="8" maxlength="128"
+                autocomplete="new-password" required>
+            </div>
+            <div class="profile-field-wide">
+              <button class="btn btn-outline" type="submit">Đổi mật khẩu</button>
+              <p id="password-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <div><strong>UniCareer</strong><p>Quản lý tài khoản ứng viên.</p></div>
+      <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="cv-manage.html">Hồ sơ CV</a></div>
+    </div>
+  </footer>
 </body>
 
 </html>

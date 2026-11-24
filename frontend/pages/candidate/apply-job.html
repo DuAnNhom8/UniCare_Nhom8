@@ -8,7 +8,9 @@
   <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/candidate.css">
+  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/candidate.js" defer></script>
 </head>
 
 <body>
@@ -16,8 +18,8 @@
     <div class="container nav-wrap"><a class="brand" href="../../index.html"><span
           class="brand-mark">U</span>UniCareer</a>
       <nav class="nav-main"><a class="is-active" href="index.html" aria-current="page">Việc làm</a><a href="my-applications.html">Đơn ứng tuyển</a><a
-          href="cv-manage.html">Hồ sơ & CV</a></nav>
-      <div class="nav-side"><span class="demo-label">DEMO · ỨNG VIÊN</span><a class="btn btn-outline"
+      href="profile.html">Hồ sơ cá nhân</a><a href="cv-manage.html">Hồ sơ CV</a></nav>
+      <div class="nav-side"><span class="demo-label">KHU VỰC ỨNG VIÊN</span><a class="btn btn-outline"
           href="../auth/login.html">Đăng nhập</a></div>
     </div>
   </header>
@@ -28,39 +30,38 @@
       <div class="apply-layout">
         <section class="form-card card">
           <h1 id="apply-job-title">Ứng tuyển Backend Developer Intern</h1>
-          <p>Hoàn thiện thông tin để gửi hồ sơ đến <span id="apply-job-company">TechNova</span>.</p>
+          <p>Hoàn thiện thông tin để gửi hồ sơ đến <span id="apply-job-company">Công ty TNHH Công nghệ Mây Việt</span>.</p>
           <div class="profile-summary">
-            <div class="summary-field"><span>Ứng viên</span><strong>Nguyễn Minh Anh</strong></div>
-            <div class="summary-field"><span>Email</span><strong>minhanh@example.com</strong></div>
-            <div class="summary-field"><span>Trường</span><strong>Đại học Công nghệ</strong></div>
-            <div class="summary-field"><span>CV hiện tại</span><strong>NguyenMinhAnh_CV.pdf</strong></div>
+            <div class="summary-field"><span>Ứng viên</span><strong id="apply-candidate-name">Ứng viên</strong></div>
+            <div class="summary-field"><span>Email</span><strong id="apply-candidate-email">—</strong></div>
+            <div class="summary-field"><span>Trường</span><strong id="apply-candidate-school">—</strong></div>
+            <div class="summary-field"><span>CV hiện tại</span><strong id="apply-candidate-cv">Chưa chọn</strong></div>
           </div>
-          <form action="#" method="get">
-            <div class="field"><label for="apply-email">Email liên hệ</label><input id="apply-email" type="email"
-                value="minhanh@example.com" required></div>
-            <div class="field"><label for="cv-select">Chọn CV</label><select id="cv-select">
-                <option>NguyenMinhAnh_CV.pdf · CV hiện tại</option>
-              </select></div>
-            <div class="field"><label for="cv-upload">Tệp CV (tùy chọn)</label><input id="cv-upload" type="file"
-                accept=".pdf,.doc,.docx"></div>
+          <p id="apply-state" role="status" aria-live="polite"></p>
+          <p id="apply-feedback" role="status" aria-live="polite"></p>
+          <form id="application-form" action="#" method="post">
+            <div class="field"><label for="apply-email">Email liên hệ</label><input id="apply-email" type="email" required></div>
+            <div class="field"><label for="cv-select">Chọn CV đã nhập</label><select id="cv-select" required>
+                <option value="">Đang tải CV đã lưu…</option>
+              </select><small>Chỉnh sửa hoặc tạo phiên bản CV tại trang Hồ sơ CV.</small></div>
             <div class="field"><label for="cover-letter">Thư giới thiệu</label><textarea id="cover-letter" rows="5"
                 placeholder="Chia sẻ ngắn gọn lý do bạn phù hợp với vị trí này."></textarea></div><label
-              class="checkline"><input type="checkbox" required><span>Tôi xác nhận thông tin hồ sơ là chính
-                xác.</span></label><button class="btn" type="button" disabled>Gửi hồ sơ (bản demo)</button>
+              class="checkline"><input id="apply-confirm" type="checkbox" required><span>Tôi xác nhận thông tin hồ sơ là chính
+                xác.</span></label><button class="btn" id="apply-submit" type="submit">Gửi hồ sơ</button>
+            <p id="apply-next" hidden><a class="btn btn-outline" href="my-applications.html">Xem đơn ứng tuyển</a></p>
           </form>
         </section>
         <aside class="detail-sidebar">
           <section class="card">
             <h3>Vị trí ứng tuyển</h3>
             <div class="company-logo" id="apply-job-logo">T</div>
-            <p><strong id="apply-job-position">Backend Developer Intern</strong><br><span id="apply-job-company-location">TechNova · TP. Hồ Chí Minh</span></p>
-            <p class="muted" id="apply-job-meta">Thực tập · 3–5 triệu/tháng</p><a id="apply-job-view-link" class="btn btn-outline btn-full"
+            <p><strong id="apply-job-position">Backend Developer Intern</strong><br><span id="apply-job-company-location">Công ty TNHH Công nghệ Mây Việt · TP. Hồ Chí Minh</span></p>
+            <p class="muted" id="apply-job-meta">Thực tập · 5–7 triệu/tháng</p><a id="apply-job-view-link" class="btn btn-outline btn-full"
               href="job-detail.html">Xem chi tiết công việc</a>
           </section>
           <section class="card">
             <h3>Lưu ý</h3>
-            <p>Đảm bảo CV có thông tin liên hệ và kỹ năng phù hợp. Hồ sơ gửi trong giao diện này chưa được lưu vào hệ
-              thống.</p>
+            <p>Đảm bảo CV có thông tin liên hệ phù hợp. Hồ sơ sẽ được gửi đến nhà tuyển dụng để xem xét.</p>
           </section>
         </aside>
       </div>
@@ -69,7 +70,7 @@
   <footer class="site-footer">
     <div class="container footer-layout">
       <div><strong>UniCareer</strong>
-        <p>Giao diện ứng tuyển minh họa.</p>
+        <p>Theo dõi tiến trình ứng tuyển ngay trên UniCareer.</p>
       </div>
       <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="my-applications.html">Đơn ứng tuyển</a>
       </div>

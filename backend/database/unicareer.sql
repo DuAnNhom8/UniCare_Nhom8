@@ -1,0 +1,1 @@
+SELECT * FROM unicareer_db.cv_analyses;

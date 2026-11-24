@@ -4,12 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Quản lý hồ sơ và CV UniCareer">
-  <title>Hồ sơ & CV | UniCareer</title>
+  <meta name="description" content="Tạo CV theo mẫu hoặc tải CV PDF, DOCX lên để ứng tuyển và phân tích bằng AI.">
+  <title>Hồ sơ CV | UniCareer</title>
   <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/candidate.css">
+  <script src="../../assets/js/api.js" defer></script>
   <script src="../../assets/js/site-ui.js" defer></script>
+  <script src="../../assets/js/candidate.js" defer></script>
 </head>
 
 <body>
@@ -19,66 +21,169 @@
       <nav class="nav-main" aria-label="Điều hướng ứng viên">
         <a href="index.html">Việc làm</a>
         <a href="my-applications.html">Đơn ứng tuyển</a>
-        <a class="is-active" href="cv-manage.html" aria-current="page">Hồ sơ & CV</a>
+        <a href="profile.html">Hồ sơ cá nhân</a>
+        <a class="is-active" href="cv-manage.html" aria-current="page">Hồ sơ CV</a>
       </nav>
-      <div class="nav-side"><span class="demo-label">DEMO · ỨNG VIÊN</span><a class="btn btn-outline"
-          href="../auth/login.html">Đăng nhập</a></div>
+      <div class="nav-side">
+        <span class="demo-label">KHÔNG GIAN ỨNG VIÊN</span>
+        <a class="btn btn-outline" href="../auth/login.html">Đăng nhập</a>
+      </div>
     </div>
   </header>
+
   <main class="page">
     <div class="container">
-      <nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Việc làm</a><span>/</span><span class="current">Hồ
-          sơ & CV</span></nav>
+      <nav class="crumbs" aria-label="Đường dẫn">
+        <a href="index.html">Việc làm</a><span>/</span><span class="current">Hồ sơ CV</span>
+      </nav>
       <div class="history-header">
         <div class="screen-heading">
-          <h1>Hồ sơ & CV của tôi</h1>
-          <p>Quản lý thông tin ứng viên và chuẩn bị hồ sơ trước khi ứng tuyển.</p>
+          <h1>Hồ sơ CV</h1>
+          <p>Tạo CV theo mẫu hoặc tải CV PDF, DOCX có sẵn lên để ứng tuyển và phân tích bằng AI.</p>
         </div>
-        <a class="btn btn-outline" href="index.html">Khám phá việc làm</a>
+        <a class="btn btn-outline" href="profile.html">Quản lý hồ sơ cá nhân</a>
       </div>
-      <div class="cv-layout">
-        <section class="card">
-          <div class="mini-profile">
-            <div class="company-logo">NA</div>
-            <h3>Nguyễn Minh Anh</h3>
-            <p>Backend Developer Intern</p>
-            <p>Đại học Công nghệ · Công nghệ thông tin</p>
-            <p><strong>Kỹ năng:</strong> Python, FastAPI, MySQL</p>
-          </div>
-          <div class="cv-file-row"><span class="company-logo company-logo--orange">PDF</span>
-            <div><strong>NguyenMinhAnh_CV.pdf</strong>
-              <p class="muted">CV hiện tại · Đang sử dụng</p>
+
+      <div class="cv-workspace">
+        <section class="card cv-create-card">
+          <div class="cv-create-heading">
+            <div>
+              <span class="eyebrow">CV THEO MẪU</span>
+              <h2>Tạo CV phù hợp với từng cơ hội</h2>
+              <p>Nhập nội dung CV trực tiếp. Thông tin liên hệ được điền sẵn từ hồ sơ cá nhân và có thể chỉnh sửa riêng cho CV này.</p>
             </div>
+            <button id="cv-create-button" class="btn" type="button">Tạo CV mới</button>
           </div>
+
+          <section id="cv-editor-panel" class="cv-editor-panel" hidden aria-labelledby="cv-editor-heading">
+            <div class="cv-editor-heading">
+              <div>
+                <h3 id="cv-editor-heading">Thông tin CV</h3>
+                <p class="muted">Các thay đổi tại đây chỉ áp dụng cho phiên bản CV này.</p>
+              </div>
+              <button id="cv-editor-cancel" class="btn btn-outline" type="button">Đóng</button>
+            </div>
+            <form id="cv-builder-form">
+              <div class="field">
+                <label for="cv-title">Tên phiên bản CV</label>
+                <input id="cv-title" maxlength="255" placeholder="Ví dụ: CV Backend Developer" required>
+              </div>
+              <fieldset class="cv-fieldset">
+                <legend>Thông tin liên hệ trong CV</legend>
+                <div class="profile-fields">
+                  <div class="field">
+                    <label for="cv-full-name">Họ và tên</label>
+                    <input id="cv-full-name" maxlength="255" required>
+                  </div>
+                  <div class="field">
+                    <label for="cv-email">Email</label>
+                    <input id="cv-email" type="email" maxlength="255">
+                  </div>
+                  <div class="field">
+                    <label for="cv-phone">Số điện thoại</label>
+                    <input id="cv-phone" type="tel" maxlength="20">
+                  </div>
+                  <div class="field">
+                    <label for="cv-github">GitHub</label>
+                    <input id="cv-github" type="url" maxlength="500" placeholder="https://github.com/...">
+                  </div>
+                  <div class="field profile-field-wide">
+                    <label for="cv-linkedin">LinkedIn</label>
+                    <input id="cv-linkedin" type="url" maxlength="500" placeholder="https://linkedin.com/in/...">
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="cv-fieldset">
+                <legend>Nội dung chuyên môn</legend>
+                <div class="cv-content-grid">
+                  <div class="field">
+                    <label for="cv-objective">Mục tiêu nghề nghiệp</label>
+                    <textarea id="cv-objective" rows="4" maxlength="5000"
+                      placeholder="Mục tiêu và định hướng nghề nghiệp của bạn"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="cv-education">Học vấn</label>
+                    <textarea id="cv-education" rows="4" maxlength="10000"
+                      placeholder="Trường, chuyên ngành, thời gian học, thành tích"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="cv-experience">Kinh nghiệm làm việc</label>
+                    <textarea id="cv-experience" rows="5" maxlength="15000"
+                      placeholder="Vị trí, đơn vị, thời gian và trách nhiệm chính"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="cv-projects">Dự án</label>
+                    <textarea id="cv-projects" rows="5" maxlength="15000"
+                      placeholder="Tên dự án, vai trò, công nghệ và kết quả"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="cv-skills">Kỹ năng</label>
+                    <textarea id="cv-skills" rows="4" maxlength="5000"
+                      placeholder="Ví dụ: Python, FastAPI, MySQL, Git"></textarea>
+                  </div>
+                  <div class="field">
+                    <label for="cv-certifications">Chứng chỉ</label>
+                    <textarea id="cv-certifications" rows="4" maxlength="10000"
+                      placeholder="Tên chứng chỉ, đơn vị cấp và thời gian"></textarea>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="cv-editor-actions">
+                <button class="btn" type="submit">Lưu phiên bản CV</button>
+                <button id="cv-editor-cancel-bottom" class="btn btn-outline" type="button">Hủy</button>
+              </div>
+              <p id="cv-builder-status" role="status" aria-live="polite"></p>
+            </form>
+          </section>
         </section>
-        <section class="card">
-          <h2>Cập nhật hồ sơ</h2>
-          <p>Thông tin dưới đây là dữ liệu minh họa cho giao diện.</p>
-          <form action="#" method="get">
-            <div class="field"><label for="candidate-name">Họ và tên</label><input id="candidate-name" name="name"
-                value="Nguyễn Minh Anh"></div>
-            <div class="field"><label for="candidate-email">Email</label><input id="candidate-email" type="email"
-                name="email" value="minhanh@example.com"></div>
-            <div class="field"><label for="candidate-school">Trường học</label><input id="candidate-school"
-                name="school" value="Đại học Công nghệ"></div>
-            <div class="field"><label for="candidate-skills">Kỹ năng</label><input id="candidate-skills" name="skills"
-                value="Python, FastAPI, MySQL"></div>
-            <div class="field"><label for="cv-file">Tệp CV</label><input id="cv-file" type="file"
-                accept=".pdf,.doc,.docx"><small>Hỗ trợ định dạng PDF, DOC hoặc DOCX.</small></div>
-            <div class="field"><label for="cv-summary">Giới thiệu</label><textarea id="cv-summary" name="summary"
-                rows="5">Sinh viên Công nghệ thông tin, yêu thích phát triển ứng dụng web và API.</textarea></div>
-            <button class="btn" type="button" disabled>Lưu hồ sơ (bản demo)</button>
+
+        <section class="card cv-upload-card" aria-labelledby="cv-upload-heading">
+          <div>
+            <span class="eyebrow">CV CÓ SẴN</span>
+            <h2 id="cv-upload-heading">Tải CV của bạn lên</h2>
+            <p>Tải tệp PDF hoặc DOCX để dùng khi ứng tuyển và phân tích bằng AI.</p>
+          </div>
+          <form id="cv-upload-form" class="cv-upload-form">
+            <div class="field">
+              <label for="cv-upload-file">Chọn tệp CV</label>
+              <input id="cv-upload-file" name="file" type="file"
+                accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                required>
+              <small>Chỉ hỗ trợ PDF hoặc DOCX, tối đa 10 MB.</small>
+            </div>
+            <button class="btn" type="submit">Tải CV lên</button>
           </form>
+          <p id="cv-upload-status" class="cv-upload-status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="cv-list-section" aria-labelledby="saved-cv-heading">
+          <div class="cv-list-heading">
+            <div>
+              <span class="eyebrow">THƯ VIỆN CỦA BẠN</span>
+              <h2 id="saved-cv-heading">Các phiên bản CV</h2>
+            </div>
+            <span id="cv-count" class="cv-count">Đang tải…</span>
+          </div>
+          <div id="cv-list" class="cv-list-grid" aria-live="polite"></div>
+          <nav id="cv-pagination" class="portal-pagination" aria-label="Phân trang phiên bản CV" hidden></nav>
+          <p id="cv-status" role="status" aria-live="polite"></p>
         </section>
       </div>
+      <dialog id="cv-preview" class="cv-preview-dialog" aria-labelledby="cv-preview-name">
+        <div class="cv-preview-toolbar">
+          <button id="cv-preview-print" class="btn" type="button">In / Lưu PDF</button>
+          <button id="cv-preview-close" class="btn btn-outline" type="button">Đóng bản xem trước</button>
+        </div>
+        <article id="cv-preview-content" class="cv-preview-content"></article>
+      </dialog>
     </div>
   </main>
+
   <footer class="site-footer">
     <div class="container footer-layout">
-      <div><strong>UniCareer</strong>
-        <p>Giao diện demo · Chưa kết nối dịch vụ lưu hồ sơ.</p>
-      </div>
-      <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="index.html">Tìm việc</a></div>
+      <div><strong>UniCareer</strong><p>Quản lý các phiên bản CV dùng khi ứng tuyển.</p></div>
+      <div class="footer-links"><a href="../../index.html">Trang chủ</a><a href="profile.html">Hồ sơ cá nhân</a></div>
     </div>
   </footer>
 </body>

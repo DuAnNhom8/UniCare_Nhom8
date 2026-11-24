@@ -8,7 +8,9 @@
     <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/admin.css">
+    <script src="../../assets/js/api.js" defer></script>
     <script src="../../assets/js/site-ui.js" defer></script>
+    <script src="../../assets/js/admin.js" defer></script>
 </head>
 
 <body>
@@ -19,19 +21,20 @@
             <nav class="portal-menu"><a href="dashboard.html"><span class="nav-emoji">◫</span><span>Tổng
                         quan</span></a><a href="users.html" aria-current="page"><span
                         class="nav-emoji">♙</span><span>Quản lý người dùng</span></a><a href="approve-jobs.html"><span
-                        class="nav-emoji">▣</span><span>Kiểm duyệt tin</span></a>
+                        class="nav-emoji">▣</span><span>Kiểm duyệt tin</span></a><a href="../candidate/index.html"><span
+                        class="nav-emoji">⌕</span><span>Tin tuyển dụng</span></a>
                 <div class="portal-menu-spacer"></div><a href="../../index.html"><span
                         class="nav-emoji">↗</span><span>Về trang chủ</span></a>
             </nav>
             <div class="portal-sidebottom"><span class="portal-avatar">UC</span>
-                <div><strong>Quản trị viên</strong><small>Giao diện demo</small></div>
+                <div><strong>Quản trị viên</strong><small>Quản trị hệ thống</small></div>
             </div>
         </aside>
         <div class="portal-main">
             <header class="portal-topbar">
                 <div class="portal-topbar-left"><a class="brand" href="../../index.html"><span
                             class="brand-mark">U</span>UniCareer</a><span>Admin Workspace</span></div>
-                <div class="portal-topbar-right"><span class="portal-demo">DỮ LIỆU DEMO</span><a
+                <div class="portal-topbar-right"><span class="portal-demo">ADMIN</span><a
                         class="portal-topbar__link" href="../../index.html">Trang chủ ↗</a></div>
             </header>
             <main class="portal-content">
@@ -47,7 +50,7 @@
                         <div>
                             <h2>Danh sách người dùng</h2>
                             <p>Tìm kiếm và xem vai trò tài khoản.</p>
-                        </div><span class="portal-pill portal-pill--info">04 tài khoản mẫu</span>
+                        </div><span class="portal-pill portal-pill--info">Đang tải...</span>
                     </div>
                     <div class="portal-toolbar">
                         <div class="field"><label for="user-search">Tìm người dùng</label><input id="user-search"
@@ -56,11 +59,11 @@
                                 <option>Tất cả vai trò</option>
                                 <option>Sinh viên</option>
                                 <option>Nhà tuyển dụng</option>
+                                <option>Quản trị viên</option>
                             </select></div>
                         <div class="field"><label for="user-status">Trạng thái</label><select id="user-status">
                                 <option>Tất cả trạng thái</option>
                                 <option>Đang hoạt động</option>
-                                <option>Chờ xác minh</option>
                                 <option>Đã khóa</option>
                             </select></div>
                     </div>
@@ -77,39 +80,39 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Nguyễn Minh Anh</strong><small>minhanh@example.com</small></td>
+                                    <td><strong>Nguyễn Mai Anh</strong><small>mai.anh.nguyen@example.com</small></td>
                                     <td>Sinh viên</td>
-                                    <td>02/11/2026</td>
+                                    <td>11/11/2026</td>
                                     <td><span class="status status--success">Đang hoạt động</span></td>
                                     <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>TechNova</strong><small>hr@technova.example</small></td>
+                                    <td><strong>Công ty TNHH Công nghệ Mây Việt</strong><small>hr@mayviet.example.com</small></td>
                                     <td>Nhà tuyển dụng</td>
-                                    <td>28/10/2026</td>
+                                    <td>09/11/2026</td>
                                     <td><span class="status status--success">Đang hoạt động</span></td>
                                     <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Trần Gia Hân</strong><small>giahan@example.com</small></td>
+                                    <td><strong>Trần Quang Huy</strong><small>quang.huy.tran@example.com</small></td>
                                     <td>Sinh viên</td>
-                                    <td>25/10/2026</td>
+                                    <td>05/11/2026</td>
                                     <td><span class="status status--warning">Chờ xác minh</span></td>
                                     <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>BrightWorks</strong><small>jobs@brightworks.example</small></td>
+                                    <td><strong>Công ty Cổ phần Sản phẩm số Hướng Dương</strong><small>tuyendung@huongduong.example.com</small></td>
                                     <td>Nhà tuyển dụng</td>
-                                    <td>21/10/2026</td>
+                                    <td>02/11/2026</td>
                                     <td><span class="status status--rejected">Đã khóa</span></td>
                                     <td><button class="btn btn-outline btn-sm" type="button" disabled>Xem</button></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <nav id="admin-users-pagination" class="portal-pagination" aria-label="Phân trang tài khoản" hidden></nav>
                 </section>
-                <p class="portal-help">Bản giao diện tĩnh: tìm kiếm, bộ lọc và trạng thái tài khoản chưa kết nối chức
-                    năng.</p>
+                <p class="portal-help">Tìm kiếm, lọc và cập nhật trạng thái tài khoản.</p>
             </main>
         </div>
     </div>

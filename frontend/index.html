@@ -10,7 +10,9 @@
   <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/home.css">
+  <script src="assets/js/api.js" defer></script>
   <script src="assets/js/site-ui.js" defer></script>
+  <script src="assets/js/home.js" defer></script>
 </head>
 
 <body>
@@ -35,60 +37,113 @@
     <div class="container">
       <section class="home-hero">
         <div class="home-hero-content">
-          <div class="home-label">UNICAREER · NỀN TẢNG NGHỀ NGHIỆP SINH VIÊN</div>
-          <h1>Khởi đầu sự nghiệp.<br>Kiến tạo tương lai.</h1>
-          <p>Khám phá cơ hội thực tập và việc làm phù hợp, chuẩn bị hồ sơ chuyên nghiệp và kết nối với doanh nghiệp.</p>
+          <div class="home-label"><span></span> NỀN TẢNG NGHỀ NGHIỆP DÀNH CHO SINH VIÊN</div>
+          <h1>Cơ hội đầu tiên,<br><span>bước tiến dài lâu.</span></h1>
+          <p>Tìm việc phù hợp, chuẩn bị CV và theo dõi hành trình ứng tuyển ngay trên một nền tảng.</p>
+          <form class="home-search" id="home-search">
+            <label class="home-search__keyword">
+              <span aria-hidden="true">⌕</span>
+              <input id="home-keyword" name="keyword" type="search" placeholder="Vị trí, kỹ năng hoặc công ty"
+                aria-label="Tìm theo vị trí, kỹ năng hoặc công ty">
+            </label>
+            <label class="home-search__location">
+              <span aria-hidden="true">⌖</span>
+              <select id="home-location" name="location" aria-label="Địa điểm">
+                <option value="">Mọi địa điểm</option>
+                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                <option value="Hà Nội">Hà Nội</option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Hybrid">Hybrid</option>
+              </select>
+            </label>
+            <button class="btn btn-lg" type="submit">Tìm cơ hội</button>
+          </form>
+          <div class="home-quick-search" aria-label="Tìm nhanh theo lĩnh vực">
+            <span>Gợi ý:</span>
+            <button type="button" data-home-type="INTERNSHIP">Thực tập</button>
+            <button type="button" data-home-keyword="Python">Python</button>
+            <button type="button" data-home-keyword="dữ liệu">Phân tích dữ liệu</button>
+          </div>
           <div class="home-actions">
             <a class="btn btn-lg" href="pages/candidate/index.html">Khám phá việc làm</a>
             <a class="btn btn-outline" href="pages/auth/register.html">Tạo tài khoản</a>
           </div>
         </div>
+        <div class="home-hero-visual" aria-hidden="true">
+          <div class="home-visual-orbit home-visual-orbit--one"></div>
+          <div class="home-visual-orbit home-visual-orbit--two"></div>
+          <div class="home-visual-card">
+            <div class="home-visual-card__top"><span class="home-visual-mark">U</span><span>Hành trình nghề nghiệp</span></div>
+            <div class="home-visual-lines"><i></i><i></i><i></i></div>
+            <div class="home-visual-steps">
+              <span><b>01</b>Tìm việc</span>
+              <span><b>02</b>Tạo CV</span>
+              <span><b>03</b>Ứng tuyển</span>
+            </div>
+            <div class="home-visual-note"><span>✦</span> Bắt đầu từ cơ hội phù hợp với bạn</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-jobs" id="home-jobs" aria-labelledby="home-jobs-title">
+        <div class="home-section-heading">
+          <div>
+            <span class="home-section-kicker">CƠ HỘI MỚI</span>
+            <h2 id="home-jobs-title">Việc làm đang chờ bạn</h2>
+            <p>Các tin tuyển dụng mới nhất từ doanh nghiệp trên UniCareer.</p>
+          </div>
+          <a class="home-view-all" href="pages/candidate/index.html">Xem tất cả việc làm <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="home-job-list" id="home-job-list" aria-live="polite"></div>
+        <p class="home-job-status" id="home-job-status" role="status">Đang tải cơ hội việc làm...</p>
       </section>
 
       <section class="home-section" aria-labelledby="how-title">
-        <h2 id="how-title">Sẵn sàng cho bước tiếp theo</h2>
-        <p class="home-section-intro">Tập trung vào hành trình nghề nghiệp, không cần chọn lại vai trò mỗi lần truy cập.
-        </p>
+        <div class="home-section-heading">
+          <div>
+            <span class="home-section-kicker">BẮT ĐẦU THẬT ĐƠN GIẢN</span>
+            <h2 id="how-title">Từng bước đến công việc phù hợp</h2>
+          </div>
+        </div>
         <div class="home-feature-grid">
           <article class="card home-feature">
-            <span class="home-feature-icon" aria-hidden="true">⌕</span>
+            <span class="home-feature-icon home-feature-icon--blue" aria-hidden="true">⌕</span>
+            <span class="home-feature-number">BƯỚC 01</span>
             <h3>Tìm cơ hội phù hợp</h3>
-            <p>Duyệt việc làm và thực tập dành cho sinh viên theo ngành nghề, kỹ năng và địa điểm.</p>
+            <p>Lọc tin theo vị trí, lĩnh vực và địa điểm để tập trung vào cơ hội dành cho bạn.</p>
           </article>
           <article class="card home-feature">
-            <span class="home-feature-icon" aria-hidden="true">▤</span>
+            <span class="home-feature-icon home-feature-icon--violet" aria-hidden="true">▤</span>
+            <span class="home-feature-number">BƯỚC 02</span>
             <h3>Chuẩn bị hồ sơ</h3>
-            <p>Quản lý thông tin cá nhân, CV và theo dõi các đơn ứng tuyển tại một nơi.</p>
+            <p>Tạo CV chuyên nghiệp và quản lý thông tin ứng tuyển trong cùng một tài khoản.</p>
           </article>
           <article class="card home-feature">
-            <span class="home-feature-icon" aria-hidden="true">↗</span>
+            <span class="home-feature-icon home-feature-icon--green" aria-hidden="true">↗</span>
+            <span class="home-feature-number">BƯỚC 03</span>
             <h3>Kết nối doanh nghiệp</h3>
-            <p>Doanh nghiệp có thể tạo tài khoản nhà tuyển dụng để đăng tin và quản lý ứng viên.</p>
+            <p>Ứng tuyển và theo dõi trạng thái hồ sơ mà không bỏ lỡ cập nhật từ nhà tuyển dụng.</p>
           </article>
         </div>
       </section>
 
       <section class="home-employer" id="employers" aria-labelledby="employer-title">
-        <div>
-          <h2 id="employer-title">Bạn là nhà tuyển dụng?</h2>
-          <p>Tạo tài khoản và chọn vai trò nhà tuyển dụng trong bước đăng ký.</p>
+        <div class="home-employer-copy">
+          <span class="home-section-kicker">DÀNH CHO DOANH NGHIỆP</span>
+          <h2 id="employer-title">Bạn đang tìm kiếm nhân tài?</h2>
+          <p>Đăng tin tuyển dụng, tiếp cận ứng viên và quản lý hồ sơ trong một không gian làm việc.</p>
         </div>
         <div class="home-actions home-actions--compact">
-          <a class="btn" href="pages/company/dashboard.html">Xem không gian doanh nghiệp</a>
-          <a class="btn btn-outline" href="pages/auth/register.html">Đăng ký nhà tuyển dụng</a>
+          <a class="btn btn-lg" href="pages/auth/register.html?role=employer">Bắt đầu tuyển dụng <span aria-hidden="true">→</span></a>
         </div>
       </section>
-
-      <p class="home-demo-note">Bản trình diễn sử dụng dữ liệu mẫu. Nút “Xem không gian doanh nghiệp” mở trực tiếp giao
-        diện demo, không yêu cầu đăng nhập. Khi xác thực được kết nối, hệ thống sẽ điều hướng người dùng đến đúng khu
-        vực theo vai trò tài khoản. Khu vực quản trị dành riêng cho tài khoản Admin.</p>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-layout">
       <div><strong>UniCareer</strong>
-        <p>Dự án học tập · Frontend HTML, CSS, JavaScript · FastAPI + MySQL khi tích hợp Backend</p>
+        <p>Kết nối sinh viên với cơ hội nghề nghiệp và doanh nghiệp với ứng viên tiềm năng.</p>
       </div>
       <div class="footer-links"><a href="pages/candidate/index.html">Cơ hội việc làm</a><a
           href="pages/auth/login.html">Đăng nhập</a></div>
