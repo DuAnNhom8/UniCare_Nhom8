@@ -7,6 +7,10 @@
   max-width: 560px;
 }
 
+.auth-card--login .btn-full {
+  margin-top: 20px;
+}
+
 .auth-card--register {
   max-width: 860px;
   margin: 0 auto 48px;
