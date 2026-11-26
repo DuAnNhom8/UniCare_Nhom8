@@ -80,6 +80,7 @@ function renderPortalPagination(container, page, total, pageSize, onPageChange) 
   summary.textContent = `Trang ${page}/${pageCount} · ${total} mục`;
   container.append(summary);
 }
+window.renderPortalPagination = renderPortalPagination;
 
 function initializeCandidatePortal() {
   if (!window.location.pathname.includes("/pages/candidate/")) return;

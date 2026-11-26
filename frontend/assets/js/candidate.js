@@ -29,6 +29,53 @@ function formatDate(value) {
   return `${day}/${month}/${year}`;
 }
 
+function safeRenderPagination(container, page, total, pageSize, onPageChange) {
+  if (typeof window.renderPortalPagination === "function") {
+    try {
+      window.renderPortalPagination(container, page, total, pageSize, onPageChange);
+      return;
+    } catch (_) {}
+  }
+  if (!container) return;
+  const pageCount = Math.ceil(total / pageSize);
+  container.replaceChildren();
+  container.hidden = pageCount <= 1;
+  if (pageCount <= 1) return;
+
+  const addButton = (label, targetPage, options = {}) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `portal-page-button${options.active ? " is-active" : ""}`;
+    button.textContent = label;
+    button.disabled = Boolean(options.disabled);
+    if (options.active) button.setAttribute("aria-current", "page");
+    if (options.label) button.setAttribute("aria-label", options.label);
+    button.addEventListener("click", () => onPageChange(targetPage));
+    container.append(button);
+  };
+
+  addButton("‹ Trước", page - 1, { disabled: page <= 1, label: "Trang trước" });
+  const pages = Array.from(new Set([1, page - 1, page, page + 1, pageCount]))
+    .filter((v) => v >= 1 && v <= pageCount)
+    .sort((a, b) => a - b);
+  let previousPage = 0;
+  pages.forEach((value) => {
+    if (previousPage && value - previousPage > 1) {
+      const ellipsis = document.createElement("span");
+      ellipsis.className = "portal-page-ellipsis";
+      ellipsis.textContent = "…";
+      container.append(ellipsis);
+    }
+    addButton(String(value), value, { active: value === page, label: `Trang ${value}` });
+    previousPage = value;
+  });
+  addButton("Sau ›", page + 1, { disabled: page >= pageCount, label: "Trang tiếp theo" });
+  const summary = document.createElement("span");
+  summary.className = "portal-pagination-summary";
+  summary.textContent = `Trang ${page}/${pageCount} · ${total} mục`;
+  container.append(summary);
+}
+
 function selectedJobType(select) {
   if (!select || select.selectedIndex === 0) return "";
   const value = select.value || select.options[select.selectedIndex].textContent;
@@ -164,7 +211,7 @@ function initializePublicJobList() {
           ? ""
           : "Không tìm thấy việc làm phù hợp. Hãy thử thay đổi bộ lọc.";
       }
-      renderPortalPagination(pagination, page, result.total, pageSize, loadJobs);
+      safeRenderPagination(pagination, page, result.total, pageSize, loadJobs);
     } catch (error) {
       if (error.name === "AbortError" || activeRequest !== requestController) return;
       if (counter) counter.textContent = "Không tải được danh sách";
@@ -368,7 +415,7 @@ async function initializeApplicationHistory() {
         list.append(card);
       });
       feedback.textContent = result.total ? `Bạn đã nộp ${result.total} đơn.` : "Bạn chưa ứng tuyển công việc nào.";
-      renderPortalPagination(pagination, page, result.total, pageSize, loadApplications);
+      safeRenderPagination(pagination, page, result.total, pageSize, loadApplications);
     } catch (error) {
       showCandidateError(feedback, error);
     }
@@ -564,7 +611,7 @@ async function initializeCVManager() {
     if (!cvs.length) {
       const empty = candidateText("div", "cv-empty", "Bạn chưa có phiên bản CV. Hãy tạo CV theo mẫu hoặc tải lên tệp PDF/DOCX.");
       list.append(empty);
-      renderPortalPagination(pagination, cvPage, 0, pageSize, renderCVPage);
+      safeRenderPagination(pagination, cvPage, 0, pageSize, renderCVPage);
       return;
     }
     cvs.slice((cvPage - 1) * pageSize, cvPage * pageSize).forEach((cv) => {
@@ -647,7 +694,7 @@ async function initializeCVManager() {
       row.append(aiConsentLabel);
       list.append(row);
     });
-    renderPortalPagination(pagination, cvPage, cvs.length, pageSize, renderCVPage);
+    safeRenderPagination(pagination, cvPage, cvs.length, pageSize, renderCVPage);
   }
 
   async function loadCVs() {

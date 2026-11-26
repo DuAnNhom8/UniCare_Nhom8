@@ -2,12 +2,16 @@
 backend/.env
 
 # Python
+.venv
+.venv/
 backend/.venv/
 backend/__pycache__/
 backend/app/**/__pycache__/
 *.py[cod]
 
 # Local databases and uploaded files
+*.db
+**/*.db
 backend/*.db
 backend/private_uploads/
 backend/uploads/
